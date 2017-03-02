@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>判断不用浏览器的方案</title>
+</head>
+<body>
+</body>
+<script type="text/javascript">
+	// var suserAgent = navigator.userAgent;
+	// console.log(suserAgent);
+
+	// var suserVersion=navigator.appVersion;
+	// console.log(suserVersion) 
+	function myBrowser(){
+		var userAgent = navigator.userAgent;   // 取得浏览器的userAgent字符串
+		var isOpera = userAgent.indexOf('Opera') > -1;
+
+		// 判断是否是opera浏览器
+		if(isOpera){
+			return "Opera";
+		}
+		// 判断是否是FireFox浏览器
+		if(userAgent.toLowerCase().indexOf('firefox') > -1){
+			return "Firefox";
+		}
+		//判断是否是chrome浏览器
+		if(userAgent.toLowerCase().indexOf('chrome') > -1){
+			return "Chrome";
+		}
+		// 判断是否是safari浏览器
+		if(userAgent.toLowerCase().indexOf('safafi') >-1){
+			return "Safari";
+		}
+		// 判断是否是IE浏览器
+		if(userAgent.toLowerCase().indexOf('compatible') > -1 && userAgent.toLowerCase().indexOf('MSIE') >-1 && !isOpera){
+			return "IE";
+		}
+
+	}
+	var Browser = myBrowser();
+	if("IE" == Browser){
+		alert("IE")
+	}
+	if("Firefox" == Browser){
+		alert("Firefox")
+	}
+	if("Chrome" == Browser){
+		alert("Chrome")
+	}
+	if("Opera" == Browser){
+		alert("Opera")
+	}
+	if("Safari" == Browser){
+		alert("Safari")
+	}
+</script>
+</html>

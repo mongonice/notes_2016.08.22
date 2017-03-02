@@ -1,0 +1,105 @@
+<!doctype html>
+<html leng="en">
+	<head>
+		<meta charset="utf-8">
+		<title>浅度clone和深度clone</title>
+	</head>
+	<body>
+		
+	</body>
+	<script type="text/javascript">
+		var oPerson = {
+			oName:"mongo",
+			oAge:18,
+			oAddress:{
+				province:'beijing'
+			},
+			oFavorite:[
+				"swimming",
+				{"reading":"techonology book"}
+			],
+			skill:function(){
+				console.log("mongo is coding")
+			}
+		}
+
+		function clone(obj){
+			var result = {};
+			for(var key in obj){
+				result[key] = obj[key];
+			}
+			return result;
+		}
+
+		var oNew = clone(oPerson);
+		oNew.oName = 'mango';
+		console.log(oPerson.oName)
+		oNew.oAge = 27;
+		console.log(oPerson.oAge)
+		console.log(oPerson.oAddress.province); // beijing
+		oNew.oAddress.province = "shanghai";
+		console.log(oPerson.oAddress.province);  // shanghai
+
+		//返回传递给他的任意对象的类
+	function isClass(o){
+	    if(o===null) return "Null";
+	    if(o===undefined) return "Undefined";
+	    return Object.prototype.toString.call(o).slice(8,-1);
+	}
+
+    
+	// Object.prototype.toString.call("a").slice(8,-1).toLowerCase()   "string"
+	// Object.prototype.toString.call({a:2}).slice(8,-1).toLowerCase()  "object"
+	// Object.prototype.toString.call(["a",2]).slice(8,-1).toLowerCase() "object"
+	// Object.prototype.toString.call(4).slice(8,-1).toLowerCase()       "number"
+	// Object.prototype.toString.call(null).slice(8,-1).toLowerCase()    "null"
+	// Object.prototype.toString.call(undefined).slice(8,-1).toLowerCase()  "undefined"
+	// Object.prototype.toString.call(true).slice(8,-1).toLowerCase()   "boolean"
+	// Object.prototype.toString.call(NaN).slice(8,-1).toLowerCase()   "number"
+
+	var str = Object.prototype.toString.call('a') // '[object String]'
+	var str1 = Object.prototype.toString.call(true) // '[object Boolean]'
+
+	/* 
+	(1)为什么不直接用toString方法？这是为了防止对象中的toString方法被重写，
+	为了正确的调用toString()版本，必须间接的调用Function.call()方法
+	(2)为什么不使用typeof来直接判断类型？因为对于Array而言，使用typeof（Array）返回的是object，所以不能得到正确的Array，这里对于后续的数组克隆将产生致命的问题。
+	 */
+
+	 //深度克隆
+function deepClone(obj){
+    var result,oClass=isClass(obj);
+        //确定result的类型
+    if(oClass==="Object"){
+        result={};
+    }else if(oClass==="Array"){
+        result=[];
+    }else{
+        return obj;
+    }
+    for(key in obj){
+        var copy=obj[key];
+        if(isClass(copy)=="Object"){
+            result[key]=arguments.callee(copy);//递归调用
+        }else if(isClass(copy)=="Array"){
+            result[key]=arguments.callee(copy);
+        }else{
+            result[key]=obj[key];
+        }
+    }
+    return result;
+}
+
+var copyNew = deepClone(oPerson);
+copyNew.oAddress.province = "shanghai";
+console.log(oPerson.oAddress.province);
+console.log(copyNew.oAddress.province);
+
+// //返回传递给他的任意对象的类
+// function isClass(o){
+//     if(o===null) return "Null";
+//     if(o===undefined) return "Undefined";
+//     return Object.prototype.toString.call(o).slice(8,-1);
+// }
+ 	</script>
+</html>

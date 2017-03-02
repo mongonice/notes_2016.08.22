@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Algorithms-twoSum</title>
+	</head>
+	<body>
+	</body>
+	<script>
+		var a = {n: 1};  // a 指向 {n:1}的地址
+		var b = a;  // b同时也指向 {n:1}的地址
+		a.x = a = {n: 2};   //  a.x = (a = {n:2})虽然 = 运算符是从右到左，但是别忘了有个.运算符（奶奶滴被点坑了）所以优先级高 则对象{n:1,x:{n:2}},b的指向不变哦！！！然后呢a又指向了{n:2} 
+		console.log(a.x);  // undefined
+		console.log(b.x);  // {n:2}
+	</script>
+</html>

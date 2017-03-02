@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>attr与prop的区别</title>
+</head>
+<body>
+<input type="text" id="dalian" value="1">
+<label>
+	复选框全选：
+	<input type="checkbox" id="s-all" />
+</label>
+<label>
+	单选框全选：
+	<input type="radio" id="r-all" />
+</label>
+<hr border=20>
+<div class="checkboxes">
+	<input type="checkbox" /><br/>
+	<input type="checkbox" /><br/>
+	<input type="checkbox" /><br/>
+	<input type="checkbox" /><br/>
+	<input type="checkbox" /><br/>
+	<input type="checkbox" /><br/>
+	<input type="checkbox" /><br/>
+	<input type="checkbox" /><br/>
+	<input type="checkbox" /><br/>
+	<input type="checkbox" /><br/>
+</div>
+<div class="test">
+	attr和prop的区别，follow me！ give u answer！
+</div>
+
+<input type="button" id="btn">
+</body>
+<script src="jquery-1.12.3.min.js"></script>
+<script>
+
+	var dalian=$('#dalian').val();
+
+	var btn=$('#btn');
+	btn.click(function(){
+		alert(dalian);
+	});
+	var sAll=$('#s-all');
+	var rAll=$('#r-all');
+	var checkboxes=$('.checkboxes input[type=checkbox]');
+
+//复选框:
+	//全选和不全选
+	sAll.click(function(){
+
+		if($(this).prop('checked'))
+		{
+			checkboxes.prop('checked',true);
+		}
+		else
+		{
+			checkboxes.prop('checked',false);
+		}
+	});
+
+	//如果下面的所有input框全被选中，则全选被选中，如果有一个没有被选中，则全选不被选中；
+	// var bFlag = '';
+	// checkboxes.click(function(){
+	// 	bFlag = true;
+	// 	checkboxes.each(function(){
+	// 		// if($(this).prop('checked',false)) //这是设置属性
+	// 		if($(this).prop('checked') == false)   //这是判断属性
+	// 		{
+	// 			bFlag = false;
+	// 		}
+	// 	});
+
+	// 	if( bFlag == true)
+	// 	{
+	// 		sAll.prop('checked',true);     //这是设置checked 为 真
+	// 	}
+	// 	else
+	// 	{
+	// 		sAll.prop('checked',false);
+	// 	}
+	// });
+	
+//单选框：
+	//全选和全不选
+	var rAll=$('#r-all');
+	rAll.click(function(){
+		if($(this).attr('checked'))
+		{
+			$(this).attr("checked",false);
+			checkboxes.prop('checked',false);
+		}
+		else
+		{
+			$(this).attr("checked",true);
+			checkboxes.prop('checked',true);
+		}
+		
+	});
+
+	// //下面决定上面的选中与否
+	// var bAll = '';
+	// checkboxes.click(function(){
+	// 	bAll = true;
+	// 	checkboxes.each(function(){
+	// 		// if($(this).prop('checked',false)) //这是设置属性
+	// 		if($(this).prop('checked') == false)   //这是判断属性
+	// 		{
+	// 			bAll = false;
+	// 		}
+	// 	});
+
+	// 	if( bAll == true)
+	// 	{
+	// 		rAll.prop('checked',true);     //这是设置checked 为 真
+	// 	}
+	// 	else
+	// 	{
+	// 		rAll.prop('checked',false);
+	// 	}
+	// });
+
+
+
+	//合起来
+	var _bool = '';
+	checkboxes.click(function(){
+		_bool = true;
+		checkboxes.each(function(){
+			// if($(this).prop('checked',false)) //这是设置属性
+			if($(this).prop('checked') == false)   //这是判断属性
+			{
+				_bool = false;
+			}
+		});
+
+		if( _bool == true)
+		{
+			sAll.prop('checked',true);     //这是设置checked 为 真
+			rAll.prop('checked',true);
+		}
+		else
+		{
+			sAll.prop('checked',false);
+			rAll.prop('checked',false);
+		}
+	});
+
+	//给test设置属性style
+	var test=$('.test');
+	test.click(function(){
+		$(this).css({
+			"color":'#390',
+			"fontSize":'32px',
+			"fontWeight":'bold'
+		});
+	})
+
+</script>
+</html>

@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>版权符号®</title>
+</head>
+<body>
+	<h1 style="text-align:center;">&lt;版权圈C[&copy;]&gt;&nbsp;&nbsp;&nbsp;</h1>
+	<h1 style="text-align:center;">&lt;版权圈C[&reg;]&gt;&nbsp;&nbsp;&nbsp;</h1>
+</body>
+<script>
+	var data={
+		"copyright":'this is &copy'
+	};
+	console.log(data.copyright);  //结果是this is &copy
+	//注意后台传过来的&copy是被当做字符串传过来的！！！
+	//解决方案1、查询到&copy替换;解决方案2、用输入法的特殊符号
+</script>
+</html>

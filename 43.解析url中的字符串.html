@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>parseQueryString</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		function parseQueryString(url){
+         var str = url.split("?")[1];
+         console.log(str)
+         var json = {};
+         var arr = str.split("&");
+         console.log(arr)
+         for(var i = 0; i< arr.length; i++){
+              var innerArr = arr[i].split("=");
+              console.log(innerArr);
+              json[innerArr[0]] = innerArr[1];
+    	 }
+         return json;
+      }
+
+      var re = parseQueryString('http://www.baidu.com?name=mongo&age=18&height=160')
+      console.log(re)
+
+
+ //      var parseQueryString = function (url) {
+	//    var reg = /([^\?\=\&]+)\=([^\?\=\&]*)/g;
+	//    var obj = {};
+	//    while (reg.exec (url)) {
+	//        obj[RegExp.$1] = RegExp.$2;
+	//    }
+	//    return obj;
+	// }
+	// var url = "http://wiatcmdax.cn/index.php?key0=0&key1=1&key2=2";
+	// var obj = parseQueryString (url);
+	// console.log (obj);
+
+
+
+	var test;
+	test = 1;
+	console.log(test);
+	</script>
+</html>

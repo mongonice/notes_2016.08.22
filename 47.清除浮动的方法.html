@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style type="text/css">
+	*{padding:0; margin:0;}
+	.div1{height:200px; width:100px; background:red; float:left;}
+    .div2{height:200px; width:300px; background:blue; float:left;}
+	/* 方案1：给父级加overflow:hidden */
+	/*.divp{overflow:hidden;}*/
+    
+    /* 方案2：给父级里面的最后加个div块级元素 class为clear */
+    /*.clear{
+    	clear:both;
+    }*/
+
+    /* 方案3：给父级加个clearfix */
+    .clearfix::after{display:block; clear:both; content:'';}
+    .clearfix{zoom:1;}
+</style>
+<title>清除浮动方法汇总</title>
+</head>
+<body>
+    <div class="divp clearfix">
+    	<div class="div1"></div>
+    	<div class="div2"></div>
+    	<!-- <div class="clear"></div> -->
+    </div>
+    <div class="divb">艾玛，我怎么在这个位置呢？</div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<style>
+		.txt-in{width:300px; height:80px; border:1px solid #390; margin:100px auto 20px;}
+	</style>
+	<title>ajax提交注意事项</title>
+</head>
+<body>
+<div class="txt-in" contenteditable="true">
+</div>
+</body>
+<script type="text/javascript" src="jquery-1.12.3.min.js"></script>
+<script type="text/javascript">
+	$.ajax({
+		url:"",
+		data:{},
+		type:"POST",   // 提交的类型
+		dataType:"json",  // 最好是写上此属性
+		success:function(){
+
+		},
+		error:function(){
+
+		}
+	});
+</script>
+</html>

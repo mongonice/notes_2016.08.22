@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>日期问题</title>
+</head>
+<body>
+	<div></div>
+</body>
+<script>
+	// 获取当前的时间
+	var current = new Date()
+	var y = current.getFullYear()
+	var m = current.getMonth()+1
+	var d = current.getDate()
+	var str = y+'-'+m+'-'+d
+	console.log(str) 
+
+	// 获取特定日期的时间戳
+	var future = new Date('2017-3-29').getTime()
+	// var future = new Date('2017.3.29').getTime()
+	console.log(future)
+
+	// 将日期设置到2017-3-29
+	var someDate = new Date('2017-3-29')
+	var y1 = someDate.getFullYear()
+	var m1 = someDate.getMonth()+1
+	var d1 = someDate.getDate()
+	var str1 = y1+'-'+m1+'-'+d1
+	console.log(str1)
+
+	// 将时间戳转化为日期
+	var currentStamp = new Date().getTime()
+	var setStamp = new Date('2017-3-29').getTime()
+	var stamp = Date.parse((setStamp - currentStamp)/1000)
+</script>
+</html>

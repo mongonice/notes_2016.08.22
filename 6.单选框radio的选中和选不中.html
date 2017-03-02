@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<script src="jquery-1.12.3.min.js"></script>
+	<title>单选框radio的选中与选不中</title>
+</head>
+<body>
+	<input type="radio" id="test" />
+</body>
+<script>
+	var test=$('#test');
+	test.click(function(){
+		if($(this).attr("checked"))
+		{
+			$(this).attr("checked",false);
+			console.log(0);
+		}
+		else{
+			$(this).attr("checked",true);
+			console.log(-1);
+		}
+		
+		
+	});
+</script>
+</html>

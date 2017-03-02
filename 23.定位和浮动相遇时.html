@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no, address=no, email=no">
+	<style>
+		html,body{font-size:50px; background:plum;}
+		*{padding:0; margin:0;}
+		.clearfix:after{display:block; content:''; clear:both;}
+		.clearfix{zoom:1}
+		.layer{width:4.6rem; height:2.4rem; position:fixed; left:50%; margin-left:-2.3rem; bottom:1rem; border:1px solid #000;}
+		.layer-opacity{width:100%; height:100%; position:absolute; left:0; top:0; background:#fff; opacity:0.5; filter:alpha(opacity=50);}
+
+		/*.layer-content{width:100%; height:100%; border:1px solid red; padding:0.3rem 0.3rem 0; !* 这种加padding的方式是不对的，会使其增大*!}*/
+		.layer-content{width:100%; height:100%; border:1px solid red;}
+
+		/* 加在子元素的身上用margin来调节间距才是解决之道 */
+		.left{width:1.2rem; height:1rem; background:blue; float:left; margin:0.3rem 0 0 0.3rem;}
+		.right{width:1.6rem; height:1rem; background:green; float:right; margin:0.3rem 0.3rem 0 0;}
+	</style>
+	<script>
+		;(function(win,doc){
+			win.onload = win.resize = function(){
+
+				doc.documentElement.style.fontSize = doc.documentElement.clientWidth*50/375+'px';
+			};
+		})(window,document);
+	</script>
+	<title>定位和浮动相遇时</title>
+</head>
+<body>
+<div class="layer">
+	<div class="layer-opacity"></div>
+	<div class="layer-content clearfix">
+		<div class="left"></div>
+		<div class="right"></div>
+	</div>
+</div>
+</body>
+</html>

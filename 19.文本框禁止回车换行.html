@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="jquery-1.12.3.min.js"></script>
+	<style>
+		.txt-in{width:300px; height:80px; border:1px solid #390; margin:100px auto 20px;}
+	</style>
+	<title>文本框禁止输入回车换行</title>
+</head>
+<body>
+	<div class="txt-in" contenteditable="true">
+	</div>
+</body>
+<script type="text/javascript">
+	var txtIn = $('.txt-in');
+	var test1 = $('.test1');
+	var test2 = $('.test2');
+
+	// 禁止回车换行
+	txtIn.keydown(function(ev){
+		var key_code =  ev.keyCode || ev.which;
+		if(key_code == 13)
+		{
+			return false;
+		}
+	});
+</script>
+</html>

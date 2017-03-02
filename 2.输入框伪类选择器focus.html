@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<style>
+		/* input本身会有1px的padding */
+		input{padding:0;}
+		.clearfix:after{display:block; content:''; clear:both;}
+		.clearfix{zoom:1;}
+		.fl{float:left;}
+		.fr{float:right;}
+	
+		.icon-box{width:44px; height:45px; border:1px solid rgba(0,0,0,0.6); border-right:none; border-top-left-radius: 6px; border-bottom-left-radius: 6px; text-align:center; line-height:45px;}
+		.txt-box{width:238px; height:45px; border:none; border:1px solid rgba(0,0,0,0.6); border-top-right-radius:6px; border-bottom-right-radius:6px; padding-left:10px;}
+
+		/**
+			1、input:focus{}  伪类的应用
+			2、border-bottom-left-radius:2px;
+			3、-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+		*/
+		.txt-box:focus{
+			border-color: #66afe9;
+			outline: 0;
+			-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+			-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+			-ms-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+			-o-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+			box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+	<title>输入框伪类选择器:focus</title>
+</head>
+<body>
+	<div class="clearfix" style="margin:100px 500px 0;">
+		<span class="fl icon-box"><i class="fa fa-user"></i></span>
+		<input type="text" placeholder="请输入用户名" class="fl txt-box">
+	</div>
+	<br>
+	<div class="clearfix" style="margin:0 500px;">
+		<span class="fl icon-box"><i class="fa fa-lock"></i></span>
+		<input type="text" placeholder="请输入密码" class="fl txt-box">
+	</div>
+</body>
+</html>

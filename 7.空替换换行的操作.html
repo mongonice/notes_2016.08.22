@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="jquery-1.12.3.min.js"></script>
+	<title>空替换换行</title>
+</head>
+<body>
+<div id="chara">
+	1、阳光;
+	2、正常;
+	3、善良
+</div>
+<div id="hehe">
+	大海；小孩；么么哒
+</div>
+<div id="test">
+	
+</div>
+</body>
+<script>
+	var str="1、阳光\n2、正常";
+	console.log(str);
+
+	var chara=document.getElementById('chara');
+	var str1=chara.innerHTML;
+	str1=str1.replace(/\n/g,'');
+	console.log(str1);
+
+	var str3="stronger\ntall\nblack";
+	str3=str3.replace(/\n/g,'');
+	console.log(str3);
+
+	var str4="stronger;tall;black";
+	str4=str4.replace(/\;/g,';\n');
+	console.log('==='+str4);
+	
+	var yy=document.getElementById('hehe');
+	var str5=yy.innerHTML;
+	str5 = str5.replace(/\；/g,'；<br/>');
+	yy.innerHTML = str5;
+	
+	var str="heheda、mimida、";
+	var index = str.length-1;
+	str = str.substring(0, index);
+	console.log(str);
+
+	var test=document.getElementById('test');
+	var str6="墙角数枝梅；凌寒独自开";
+	str6 = str6.replace(/\；/g,'<br/>');
+	test.innerHTML=str6;
+
+
+	var str8 = 'hehehhe<br/><br/>';
+
+	str8 = str8.replace(/<br\/>/g,'');
+
+	console.log(str8);
+
+	var str9 = "面包 ";
+
+	str9 = $.trim(str9);
+	console.log(str9);
+	console.log($.trim(str9));
+
+
+	var str10 = '今天雾霾&nbsp; &nbsp;太严重&nbsp;&nbsp;';
+	str10 = str10.replace(/&nbsp;/g,'');
+	console.log(str10);
+
+	str10 = str10.replace(/\s/g,'');
+	console.log(str10);
+
+
+	var str11 = '北京市&lt;br/&gt;哈哈喵喵&lt;br/&gt;呼呼&lt;br/&gt;'
+
+	str11 = str11.replace(/&lt;br\/&gt;/g,'<br/>');
+
+	console.log(str11)
+
+</script>
+</html>

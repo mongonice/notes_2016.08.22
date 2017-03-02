@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<style>
+	.txt-in{width:300px; height:80px; border:1px solid #390; margin:100px auto 20px;}
+	</style>
+	<title>html()和text()对于空格的处理</title>
+</head>
+<body>
+	<div class="txt-in" contenteditable="true">
+	</div>
+	<p class="test1" contenteditable="true" style="width:300px; height:40px; margin:10px auto; border:1px solid #cd1082;"></p>
+	<table style="margin:10px auto;">
+		<tr>
+			<td class="test2" contenteditable="true" style="width:300px; height:60px; border:1px solid #ccc">
+			</td>
+		</tr>
+	</table>
+</body>
+<script type="text/javascript" src="jquery-1.12.3.min.js"></script>
+<script type="text/javascript">
+var txtIn = $('.txt-in');
+var test1 = $('.test1');
+var test2 = $('.test2');
+txtIn.blur(function(){
+	console.log($(this).text());
+	var divT = $(this).text();
+	divT = divT.trim();
+	$(this).text(divT);
+	// text()取值是指的是纯本文不包括html的标签和&nbsp;
+	console.log($(this).text());
+});
+
+test1.blur(function(){
+
+	// html()取值是包括html标签比如<br/> or &nbsp;
+	console.log("html()取出的值："+$(this).html());
+});
+
+test2.blur(function(){
+	console.log("text()取出的值："+$(this).text());
+});
+</script>
+</html>

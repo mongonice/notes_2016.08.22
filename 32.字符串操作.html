@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>字符串操作</title>
+</head>
+<body>
+</body>
+<script>
+	// 截取扩展名
+	function extentName(str){
+		var pos = str.lastIndexOf('.')
+		console.log(pos)
+		return str.substring(pos+1)
+	}
+
+	var str = extentName('123456789.bak.html')
+	console.log(str)
+
+	// 字符串的截取就是0开始，没有返回值，所以必须还要赋值
+	var str1 = 'hello substring'
+	str1 = str1.substring(0,5)
+	console.log(str1)
+
+	// indexOf and lastIndexOf
+	var str2 = 'hello indexof and lastIndexOf'
+	var pos1 = str2.indexOf('f')
+	console.log(pos1)
+
+	// 虽然是逆序查找，但是下标值还是顺序数的
+	var pos2 = str2.lastIndexOf('f')
+	console.log(pos2)
+
+	// 字符串转换成数组
+	function strToArr(str){
+		return str.split('-')
+	}
+	var arr1 = strToArr('last-index-of')
+	console.log(arr1)
+
+	// 数组转换成字符串
+	function arrToStr(arr){
+		return arr.join('-')
+	}
+	var str3 = arrToStr(new Array('1,2,3,4,5'))
+	console.log(str3)
+
+	// charAt 的用法
+	var str4 = 'hello charAt'
+	var arr2=[]
+	for(var i=0; i<str4.length; i++){
+		arr2.push(str4.charAt(i))
+	}
+	console.log(arr2)
+
+	// forEach 的用法 val为数组的每一项，index为索引值，arr为整个数组
+	var arr3 = ['hello','charAt']
+	var str5 = ''
+	arr3.forEach(function(val,index,arr){
+		str5 += val
+	})
+	console.log(str5)
+
+	// 字符串的反转
+	var str6 = 'me and you'
+	str6 = str6.split(' ').reverse().join(' ')
+	console.log(str6)
+
+
+	// 排序
+	var arr4 = [34,23,53,2,6,22,89,43]
+	arr4.sort(function(a,b){
+		return a-b    // 默认从小到大
+	})
+	console.log(arr4)
+</script>
+</html>

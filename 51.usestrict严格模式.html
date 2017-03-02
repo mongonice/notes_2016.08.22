@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style type="text/css">
+</style>
+<title>use strict 严格模式</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+
+// 非严格模式下    strict mode
+function f(){
+	return !this;   // this 指向全局的变量 window  !window == false;
+}
+console.log(f());
+
+a = 1;
+console.log(a);
+
+
+</script>
+<script type="text/javascript">
+	"use strict"
+	//  严格模式情况下 
+	function f(){
+
+		a  = 4;
+		console.log(4)
+		return !this;   // this 不能指向全局变量了，所以此时的this 为undefined ！undefined == true
+	}
+	console.log(f());
+
+	// a = 2;
+	// console.log(a);
+
+	function f1(){
+		"use strict"
+		this.a = 1;    // 不能给undefined设置属性  因为this == undefined
+	}
+
+	f1();
+
+	// 禁止在函数内部遍历调用栈
+	function f3(){
+		"use strict"
+		f3.caller;  // 报错 
+		f3.arguments;  // 报错
+	}
+
+	f3();
+
+/**
+	Last-Modified/If-Modified-Since：Last-Modified/If-Modified-Since要配合Cache-Control使用。
+	Last-Modified：标示这个响应资源的最后修改时间。web服务器在响应请求时，告诉浏览器资源的最后修改时间。
+If-Modified-Since：当资源过期时（使用Cache-Control标识的max-age），发现资源具有Last-Modified声明，则再次向web服务器请求时带上头 If-Modified-Since，表示请求时间。web服务器收到请求后发现有头If-Modified-Since 则与被请求资源的最后修改时间进行比对。若最后修改时间较新，说明资源又被改动过，则响应整片资源内容（写在响应消息包体内），HTTP 200；若最后修改时间较旧，说明资源无新修改，则响应HTTP 304 (无需包体，节省浏览)，告知浏览器继续使用所保存的cache。
+
+**/
+
+/**
+Etag/If-None-Match：Etag/If-None-Match也要配合Cache-Control使用。
+Etag：web服务器响应请求时，告诉浏览器当前资源在服务器的唯一标识（生成规则由服务器决定）。Apache中，ETag的值，默认是对文件的索引节（INode），大小（Size）和最后修改时间（MTime）进行Hash后得到的。
+If-None-Match：当资源过期时（使用Cache-Control标识的max-age），发现资源具有Etage声明，则再次向web服务器请求时带上头If-None-Match （Etag的值）。web服务器收到请求后发现有头If-None-Match 则与被请求资源的相应校验串进行比对，决定返回200或304。
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</html>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>上下文的理解</title>
+</head>
+<body>
+</body>
+<script>
+	var color = 'blue';
+	function changeColor(){
+		var anotherColor = 'red';
+		function swapColors(){
+			var tempColor = anotherColor;   // red  完了之后就释放了
+			console.log('作用域里面打印tempColor='+tempColor)
+			anotherColor = color;
+		}
+		swapColors();
+		// console.log('作用域里面打印tempColor='+tempColor)   // undefined
+		console.log('作用域里面打印anotherColor='+anotherColor)   // 完了之后就释放了
+	}
+	changeColor()
+	console.log(color) // blue
+	// console.log(anotherColor)   // undefined
+	// console.log(tempColor)   // undefined
+
+
+	// 闭包
+	function f1(){
+		var n = 999;
+		function f2(){
+			alert(n);  // 999
+		}
+
+		return f2;
+	}
+
+	var result = f1();
+	result();  // 999
+
+	// function 声明要比 var 声明高级一些
+	function test(){
+		console.log(a);   // undefined
+		console.log(foo());   // 2
+
+		var a = 1;
+		function foo(){
+			return 2;
+		}
+
+	}
+
+
+	// 其实执行顺序就变成了这样子
+	// function test(){
+	// 	function foo(){
+	// 		return 2;
+	// 	}
+
+	// 	var a;
+	// 	console.log(a);
+	// 	console.log(foo());
+	// 	a = 1;
+	// }
+
+	test();
+
+	// demo2
+
+	function demo(){
+		console.log(foo);   // function () {return 'hello'}
+		console.log(bar);   // undefined
+
+		var foo = 'hello world';
+		console.log(foo);   // 'hello world' 
+
+		var bar = function (){
+			return 'world';
+		};
+
+		function foo(){
+			return 'hello';
+		}
+	}
+
+	// function 被执行顺序改变为
+	function demo(){
+		function foo(){
+			return 'hello';
+		}
+
+		var bar;
+		var foo;
+		console.log(foo);
+		console.log(bar);
+
+		foo = 'hello world';
+		console.log(foo);
+
+		bar = function(){
+			return 'world'
+		}
+	// }
+
+	demo();
+</script>
+</html>

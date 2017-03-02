@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<script src="jquery-1.12.3.min.js"></script>
+	<script src="jquery.lazyload.min.js"></script>
+	<title>图片懒加载</title>
+</head>
+<body>
+	<img data-original="images/icon1.jpg" src="icon1.gif" border="0" class="lazy"/>
+	<img data-original="images/icon2.jpg" src="icon2.gif" border="0" class="lazy"/>
+	<img data-original="images/icon3.jpg" src="icon3.gif" border="0" class="lazy"/>
+</body>
+<script>
+$('.lazy').lazyload();
+</script>
+</html>

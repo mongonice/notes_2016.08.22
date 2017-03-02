@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Algorithms-twoSum</title>
+	</head>
+	<body>
+	</body>
+	<script>
+		function twoSum (nums,target){
+			var array_index = [];
+			if(nums.length>0){
+				if(nums.length == 1){
+					if(nums[0] == target/2){
+						array_index[0] = 0;
+					}
+				}else{
+					for(var i=0, len=nums.length; i<len; i++){
+						for(var j=1,len1=nums.length-1; j<len1; j++){
+							if( (nums[i]+nums[j]) == target){
+								array_index[0] = j;
+								array_index[1] = i;
+								console.log(array_index);
+								console.log('i='+i)
+								console.log('j='+j)
+							}
+						}
+					}
+				}
+				return array_index;
+			}else{
+				return -1;  // 当nums=[]时
+			}
+		}
+
+		var array = [1,4,6,5,3,9]
+		var t = 14
+		twoSum(array,t)
+		console.log(twoSum(array,t))
+		console.log(twoSum([],t))
+		console.log(twoSum([14],t))
+		console.log(twoSum([7],t))
+	</script>
+</html>

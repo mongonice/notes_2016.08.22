@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<style>
+    .descb-myself{
+      width:480px; 
+      margin:100px auto;
+      text-align:center; /* 加text-align:center; 是用来显示居中的 */
+      font-size:24px;
+      color:#cd1082;
+    }
+	</style>
+	<title>打字效果显示</title>
+</head>
+<body>
+  <div class="descb-myself">
+  </div>
+</body>
+<script src="jquery-1.12.3.min.js"></script>
+<script>
+  // 让自我介绍像打印一样打印出来
+  var myDetail = $('.descb-myself');
+  var txtCont = '我叫Mongo<br/>一头集天赋与懒惰于一身のweb前端攻城狮';
+  var n = 0;
+
+  var tick = setInterval(function(){
+      var str = '';
+      if(txtCont.charAt(n) == '<')
+      {
+          str = myDetail.html()+'<br/>';
+          n+=4;
+      }else{
+          str = myDetail.html()+txtCont.charAt(n);
+      }
+      myDetail.html(str);
+      n++;
+      if(n >= txtCont.length){
+          clearInterval(tick);
+      }
+  },300);
+</script>
+</html>

@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<style>
+		/**
+		  *1、为了区分伪类和伪元素，所以一个用‘:’，一个用‘::’
+		  *2、伪类：a:hover a:active;
+		  *3、伪元素：a::after  and  a::before;
+		*/
+		a{text-decoration: none; color:#000; font-size:32px; margin:0 36px; position:relative;}
+
+		//效果1
+		#nav1 a::before, #nav1 a::after { position: absolute; }
+		#nav1 a:hover::before { content: "\5B"; left: -20px; }
+		#nav1 a:hover::after { content: "\5D"; right: -20px; }
+
+		//效果2
+		/**
+		  *1、在写伪元素的时候一定要写定位
+		*/
+		#nav2 a::before, #nav2::after { position: absolute; }
+		#nav2 a:hover::before {
+			position:absolute; 
+			width:98px;
+			height:98px; 
+			border:2px solid rgba(243,5,89,0.3); 
+			content:'';
+			border-radius:100%; 
+			left:50%; 
+			top:50%; 
+			margin-left:-50px; 
+			margin-top:-50px; 
+			z-index:-1;
+			}
+		#nav2 a:hover::after {
+			position:absolute; 
+			width:50px; 
+			height:50px;
+			border:6px solid rgba(243,5,89,0.5); 
+			content:'';
+			border-radius:100%; 
+			right:50%; 
+			top:50%; 
+			margin-right:-28px;
+			margin-top:-28px; 
+			z-index:-1;
+		}
+		
+		//效果3
+		/**
+			1、注意在进行伪元素的css3transition动画效果的时候，首先要对a本身
+			加上transition
+			*/
+		#nav3 a{
+			opacity:1;
+			transition:0.6s all;
+		}
+		#nav3 a:hover{
+			opacity:0.5;
+		}
+		#nav3 a::before {  
+			position: absolute;
+			opacity:1;
+			top:100%;
+		    left: 50%;
+		    margin-left:-8px;
+			color:#cd1082;
+		    opacity:0;
+		    content: "•";
+		    text-shadow: transparent 0 0;
+		    font-size: 24px;
+		    transition:0.6s all;
+		}
+		#nav3 a:hover::before {
+			opacity:1;
+			text-shadow: 10px 0 #cd1082,-10px 0 #cd1082;
+		}
+
+		//效果4
+		#nav4>a{
+			font-weight:bold;
+			/* text-shadow不是必须的 */
+			text-shadow: 0 0 1px rgba(111,134,134,0.3);
+			transition:0.6s all;
+		}
+		#nav4 a::before{
+			position:absolute;
+			opacity:0;
+			content:attr(data-cont);
+			font-size:32px;
+			color:#cd1082;
+			/* text-shadow不是必须的 */
+		    text-shadow: 0 0 1px rgba(255,255,255,0.3);
+		    /* 最主要的是动作步骤 */
+		    transform: scale(1.1) translateX(10px) translateY(-10px) rotate(4deg);
+			transition:0.6s all;
+		}
+		#nav4 a:hover::before{
+			transform: scale(1) translateX(0px) translateY(0px) rotate(0deg);
+			opacity:1;
+		}
+	</style>
+	<title>伪类和伪元素</title>
+</head>
+<body>
+	<div style="margin-left:400px; margin-top:100px;" id="nav1">
+		<a href="javascript:;">html5</a>
+		<a href="javascript:;">css3</a>
+		<a href="javascript:;">javascript</a>
+	</div>
+
+	<div style="margin-left:400px; margin-top:100px;" id="nav2">
+		<a href="javascript:;">html5</a>
+		<a href="javascript:;">css3</a>
+		<a href="javascript:;">javascript</a>
+	</div>
+
+	<div style="margin-left:400px; margin-top:100px;" id="nav3">
+		<a href="javascript:;">html5</a>
+		<a href="javascript:;">css3</a>
+		<a href="javascript:;">javascript</a>
+	</div>
+
+	<div style="margin-left:400px; margin-top:100px;" id="nav4">
+		<a href="javascript:;" data-cont="html5" style="color:#6f8686">html5</a>
+		<a href="javascript:;" data-cont="css3" style="color:#6f8686">css3</a>
+		<a href="javascript:;" data-cont="javascript" style="color:#6f8686">javascript</a>
+	</div>
+</body>
+</html>

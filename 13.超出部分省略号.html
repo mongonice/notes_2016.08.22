@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script src="jquery-1.12.3.min.js"></script>
+    <style type="text/css">
+
+        /* 
+         * overflow:hidden;  超出宽度的部分隐藏
+         * text-overflow:ellipsis;  文本超出部分为省略号
+         * white-space:nowrap;  不换行
+         */
+        .test1{
+            width:300px;
+            margin:50px auto;
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;   /* 限制不能换行的 */
+        }
+
+        .test2{
+            width:300px;
+            margin:100px auto 0;
+            display: -webkit-box;       /* 限制弹性盒子 */
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;       /* 只限制3行 */
+            overflow: hidden;
+        }
+
+        /* 注：文字未超出行的情况下也会出现省略号,可结合js优化该方法 */
+        .test3{width:300px; position: relative; margin:100px auto; line-height: 20px; max-height: 60px; overflow: hidden;}    /* 设置行高，然后向现实几行，就是行高的几倍 */
+        .test3::after{content: "..."; position: absolute; bottom: 0; right: 0; padding-left: 40px;
+            background: -webkit-linear-gradient(left, transparent, #fff 55%);
+            background: -o-linear-gradient(right, transparent, #fff 55%);
+            background: -moz-linear-gradient(right, transparent, #fff 55%);
+            background: linear-gradient(to right, transparent, #fff 55%);
+        }     /* 加渐变颜色是防止字只显示半个 */
+    </style>
+    <title>超出部分用省略号</title>
+</head>
+<body>
+    <div class="test1">
+        我相信我一定能行，一定行，肯定行。我相信我一定能行，一定行，肯定行。我相信我一定能行，一定行，肯定行。我相信我一定能行，一定行，肯定行。
+    </div>
+    <div class="test2">
+        我相信我一定能行，一定行，肯定行。我相信我一定能行，一定行，肯定行。我相信我一定能行，一定行，肯定行。我相信我一定能行，一定行，肯定行。我相信我一定能行，一定行，肯定行。我相信我一定能行，一定行，肯定行。我相信我一定能行，一定行，肯定行。我相信我一定能行，一定行，肯定行。我相信我一定能行，一定行，肯定行。我相信我一定能行，一定行，肯定行。
+    </div>
+    <div class="test3">
+        我相信我一定能行，一定行，肯定行。我相信我一定能行，一定行，肯定行。我相信我一定能行，一定行，肯定行。我相信我一定能行，一定行，肯定行。我相信我一定能行，一定行，肯定行。我相信我一定能行，一定行，肯定行。我相信我一定能行，一定行，肯定行。我相信我一定能行，一定行，肯定行。我相信我一定能行，一定行，肯定行。我相信我一定能行，一定行，肯定行。我相信我一定能行，一定行，肯定行。我相信我一定能行，一定行，肯定行。我相信我一定能行，一定行，肯定行。我相信我一定能行，一定行，肯定行。
+    </div>
+</body>
+</html>

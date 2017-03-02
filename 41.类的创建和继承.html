@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Algorithms-twoSum</title>
+	</head>
+	<body>
+	</body>
+	<script>
+	// 工厂模式 拥有自己的单独的方法
+	function createPerson(name,age){
+		//原料
+		var obj=new Object();
+		//加工
+		obj.name=name;
+		obj.age=age;
+		obj.showName=function(){
+			return this.name;
+		};
+		obj.showAge=function(){
+			return this.age;
+		};
+		//出厂
+		return obj;
+	}
+	var p1=createPerson('abc',30);
+	alert(p1.showName());
+	var p2 = createPerson('hello',44)
+	console.log(p2.showName())
+
+
+	// 构造函数 new为关键 new创建了一个空白的object，并且 var object = this； 自动返回this 缺点是和工厂模式一样拥有自己单独的方法
+	function Cat(name) {
+		this.name = name;
+	}
+
+	var cat1 = new Cat('大毛');
+	console.log(cat1.name) // 大毛
+
+
+	// 原型 prototype 给一类物体添加属性和方法
+	Cat.prototype.type = '猫科动物';  
+	Cat.prototype.makeSound = function(){
+　　　　alert("喵喵喵");
+　　}
+	console.log(cat1.type)
+	var cat2 = new Cat('二哈')
+	console.log(cat2.name)
+	console.log(cat2.makeSound())
+
+	// 构造加原型perfect  属性加在构造函数里，方法加到原型上
+
+	//继承
+	//属性继承
+	Parent.call(this,arg1,arg2...);
+	Parent.apply(this,arguments);
+
+	// 方法继承
+	
+
+	</script>
+</html>

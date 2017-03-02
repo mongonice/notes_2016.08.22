@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<style>
+	.pop{width:100px; height:80px; padding:20px; border:1px solid #390; display:none; position:fixed; left:50%; top:50%; margin-left:-50px; margin-top:-40px;}
+	li{list-style:none; margin-right:20px;}
+	.fl{float:left;}
+	.fr{float:right;}
+	.clearfix:after{display:block; content:''; clear:both;}
+	.clearfix{zoom:1;}
+	.list>li{border:1px solid #ccc; padding:20px 0;}
+	.add-btn{margin:0 20px;}
+	</style>
+	<title>事件叠加和事件委托</title>
+</head>
+<body>
+	<ul class="clearfix">
+		<li class="fl"><a href="javascript:;" class="a-link" id="aLink1">添加</a></li>
+		<li class="fl"><a href="javascript:;" class="a-link" id="aLink2">添加</a></li>
+		<li class="fl"><a href="javascript:;" class="a-link" id="aLink3">添加</a></li>
+	</ul>
+	<ul class="list">
+		<Li class="clearfix">
+			<input type="checkbox" class="fl" />
+			<input type="button" value="添加" class="fl add-btn">
+			<a href="javacript:;" class="fl del">删除</a>
+		</Li>
+	</ul>	
+	
+</body>
+<script type="text/javascript" src="jquery-1.12.3.min.js"></script>
+<script type="text/javascript">
+var aLink1 = $('#aLink1');
+var aLink1 = $('#aLink2');
+var aLink1 = $('#aLink1');
+var list = $('.list');
+
+for(var i=0; i<10; i++)
+{
+	var oLi = $('<Li class="clearfix">'
+		+'<input type="checkbox" class="fl" />'
+		+'<input type="button" value="添加" class="fl add-btn">'
+		+'<a href="javacript:;" class="fl del">删除</a></Li>');
+
+	oLi.prependTo(list);
+}
+
+$('input[type=checkbox]').click(function(){
+
+	alert(1);
+});
+
+$('input[type=button]').click(function(){
+	alert(1);
+});
+
+console.log($('.del').length);
+$('.del').click(function(){
+	console.log($(this).index());
+	// $(this).parent().remove();
+});
+
+
+</script>
+</html>

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script src="jquery-1.12.3.min.js"></script>
+    <style type="text/css">
+        body{text-align:center; background:#000; color:#fff;}
+    </style>
+    <title>正则表达式</title>
+</head>
+<body>
+    <h1>正则表达式(Regular Expression)</h1>
+    <h2><code>var reg = new RegExp();  <br/>  var reg = //;</code></h2>
+    <h3>^代表是以什么开头；<br/> $代表是以什么结尾 <br/> \b 代表一个边界</h3>
+    <h4>\d 代表数字<br/> \w 代表字母、数字、下划线 <br/> \s 代表空格 </h4>
+    <h3>{8} 代表重复8次 <br/> {2,8} 代表重复最少2次，最多8次 <br/> ? 代表 {0,1} <br/> * 代表>=0  <br/> + 代表 >=1 </h3>
+    <h3 style="color:red;">通过在 *、+ 或 ? 限定符之后放置 <b>?</b>，该表达式从"贪心"表达式转换为"非贪心"表达式或者最小匹配。</h3>
+    <p style="width:600px; line-height:32px; font-size:24px; color:#f36; margin:0 auto;">
+        "*?"   重复任意次，但尽可能少重复 <br/>
+        如“abcabc”,正则“a.*?b”只会取到第一个"acb"原本可以全部取到但加了限定符后，只会匹配尽可能少的字符 ，而"acbacb"最少字符的结果就是"acb" <br/>
+        "+?"  重复1次或更多次，但尽可能少重复,与上面一样，只是至少要重复1次<br/>
+        "??"  重复0次或1次，但尽可能少重复 <br/>
+        如 "aaacb" 正则 "a.??b" 只会取到最后的三个字符"acb"<br/>
+        "{n,m}?"  重复n到m次，但尽可能少重复<br/>
+        如 "aaaaaaaa"  正则 "a{0,m}" 因为最少是0次所以取到结果为空<br/>
+        "{n,}?"    重复n次以上，但尽可能少重复<br/>
+        如 "aaaaaaa"  正则 "a{1,}" 最少是1次所以取到结果为 "a"
+    </p>
+    <h3>下面列出捕获分组常有的用法</h3>
+    <p style="width:600px; line-height:32px; font-size:24px; color:#69c; margin:0 auto;">
+        "(exp)"    匹配exp,并捕获文本到自动命名的组里<br/>
+        "(?&lt;name&gt;exp)"   匹配exp,并捕获文本到名称为name的组里<br/>
+        "(?:exp)"  匹配exp,不捕获匹配的文本，也不给此分组分配组号<br/>
+        以下为零宽断言<br/>
+        "(?=exp)"  匹配exp前面的位置<br/>
+        如 "How are you doing" 正则"(?&lt;txt&gt;.+(?=ing))" <br/>这里取ing前所有的字符，并定义了一个捕获分组名字为 "txt" 而"txt"这个组里的值为"How are you do";<br/>
+        "(?<=exp)"  匹配exp后面的位置<br/>
+        如 "How are you doing" 正则"(?&lt;txt&gt;(?<=How).+)" <br/>这里取"How"之后所有的字符，并定义了一个捕获分组名字为 "txt" 而"txt"这个组里的值为" are you doing";<br/>
+        "(?!exp)"  匹配后面跟的不是exp的位置<br/>
+        如 "123abc" 正则 "\d{3}(?!\d)"匹配3位数字后非数字的结果<br/>
+        "(?&lt;!exp)"  匹配前面不是exp的位置<br/>
+        如 "abc123 " 正则 "(?&lt;![0-9])123" 匹配"123"前面是非数字的结果也可写成"(?!&lt;\d)123"
+    </p>
+</body>
+</html>
+<script>
+/**
+* 第一种：var reg = new RegExp();
+* 第二种：var reg = //;
+*/
+// 要求1 请校验手机号码：
+var reg1 = /^1[34578]\d{9}/;
+var mobileNumber = '1234567896';
+console.log(reg1.test(mobileNumber));  // false
+
+// 要求2 请校验11N 或者 12N 或者 1NNN开头的，后面跟7位或者8位的手机号
+var reg2 = /^(11N)|(12N)\d{8}$|^1NNN\d{7}$/;
+var phoneNumber = '3NNN2345678';
+console.log(reg2.test(phoneNumber));  // false
+
+// 要求3 纯数字但是包括小数点
+var reg3 = /^\d+(\.\d+)?$/;
+var str1 = '33a.33';
+console.log(reg3.test(str1));   // false
+
+// 要求4 纯数字但是不包小数点
+var reg4 = /^[1-9]\d*$|^0$/;
+var str2 = '034290';
+console.log(reg4.test(str2));   // false
+</script>
