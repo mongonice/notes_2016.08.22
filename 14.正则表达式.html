@@ -67,4 +67,9 @@ console.log(reg3.test(str1));   // false
 var reg4 = /^[1-9]\d*$|^0$/;
 var str2 = '034290';
 console.log(reg4.test(str2));   // false
+
+// 请输入2~6位汉字
+var reg5 = /[\u4e00-\u9fa5]{2,6}/g;
+var str5 = '名字';
+console.log(reg5.test(str5) // true
 </script>

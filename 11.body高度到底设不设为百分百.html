@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+	<!-- 苹果手机是否可行-->
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<!-- 苹果手机的状态条是黑色的-->
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<!-- 格式检查比如手机号颜色显示 -->
+	<meta name="format-detection" content="telephone=no, address=no, email=no">
+	<link rel="stylesheet" type="text/css" href="css/base.css">
+	<style type="text/css">
+	/**
+	  * 设置背景的大小导到底是百分百还是实际的宽高
+	  * 设置图片的大小到底是百分百还是实际大小
+	 */
+		html,body{font-size:50px; 
+			overflow-x:hidden;
+			/*height:100%;
+			background:url(test.png) no-repeat;
+			background-size:7.5rem 12.06rem; /* 不一定高度沾满整个屏幕 */
+			background-size:100% 100%;  /* 高度沾满整个屏幕 */*/
+		} 
+		#test{
+			width:7.5rem;
+			height:12.06rem;
+		}  /* 自身的实际大小 */
+	</style>
+	<script type="text/javascript">
+		;(function(win,doc){
+			win.onload = win.onresize = function(){
+				doc.documentElement.style.fontSize = doc.documentElement.clientWidth * 50 / 375 +'px';
+			}
+		})(window,document);
+	</script>
+	<title>移动端图片和背景的高度设置</title>
+</head>
+<body>
+<img src="test.png" id="test">
+</body>
+</html>
