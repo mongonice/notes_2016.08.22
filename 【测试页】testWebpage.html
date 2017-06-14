@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<script src="jquery-1.12.3.min.js"></script>
+	<title>Document</title>
+</head>
+<body>
+	<div style="width:200px; height:200px; background:red"></div>
+</body>
+<script>
+var i =0;
+// $(document).on('click mouseleave',function(){
+// 	return false;
+// })
+$('div').on('mouseleave click',function(event){
+	event.stopPropagation();
+	console.log(i++)
+})
+</script>
+</html>

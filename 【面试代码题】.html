@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+<script>
+
+	// code 1: 考察隐士类型转换
+	;(function(){
+      var foo = 10 + '20';
+      console.log(foo)  // 1020
+      var str = '123abc'
+      console.log( str++ )  // NaN
+      console.log(['5'] == 5)    // true
+   })();
+
+	// code 2
+	;(function(){
+      add(2,5)
+      function add(a, b){
+         console.log( a+b )  // 7
+      }
+      add1(2)(5)
+      function add1(a){
+         return function(b){
+            console.log(a + b)  // 7
+         }
+      }
+   })();
+
+	// code 3  hog a lasagna I'm
+	console.log("I'm a lasagna hog".split(' ').reverse().join(' '))
+	
+   // code 4 
+   window.Foo || (window.Foo = "bar")
+   console.log(window.Foo)  // bar
+
+   // code 5
+   ;(function(){
+      var say1 = 'hello';
+      ;(function(){
+            var bar = 'world';
+            console.log(say1 + bar)   // helloworld
+      })();
+      // console.log(say1 + bar)  // bar is not defined
+   })();
+   
+   // code 6  代码块避免变量污染
+   (function(){
+   		var Foo = [];
+   		Foo.push(1);
+   		Foo.push(2);
+   		console.log(Foo.length)  // 2
+   })()
+
+   // code 7
+   ;(function(){
+   		var foo = {n : 1};
+   		var bar = foo;
+   		foo.x = foo = {n:2};
+   		console.log(foo.x)  // undefined
+   		console.log(bar.x)  // {n : 2}
+   })();
+
+   // code 8 考察的是 var f1 = function(){console.log(1)} var f2 = function(){console.log(1)} 但是f1 = f2因为指针不同
+   // var f1 = function(){console.log(1)} var f2 = f1; 这才真正指的同一个函数呢，因为指针相同！！！
+   ;(function(){
+      function Foo(){
+         var i=0;
+         return function(){
+            console.log(i++)
+         }
+      }
+
+      var f1 = Foo(), f2 = Foo();
+      f1();  // 0
+      f1();  // 1
+      f2();  // 0
+
+      function Foo1(){
+         var i=0;
+         return function(){
+            console.log(i++)
+         }
+      }
+      var F1 = Foo1();
+      var F2 = F1;
+      F1();  // 0
+      F1();  // 1
+      F2();  // 2
+   })();
+
+   // code 9 编写一个函数，参数为 数值型n ，且返回一个数组， 数组存放 2-32之间的随机数
+   // 范围为[2, 32] 则 Math.random() 中包含小的不包含大的，所以要变成 33
+   function getRandomArr(n){
+      var randomArr = [];
+      while(randomArr.length<n){
+         var temp = Math.floor(Math.random()*(33-2)+2)
+         if(randomArr.indexOf(temp) == -1){
+            randomArr.push(temp)
+         }
+      }
+      randomArr.sort(function(a , b){
+         return a-b
+      })
+      return randomArr;
+   }
+   console.log(getRandomArr(31))
+
+   // code 10
+   var fullname = 'John Doe'
+   ;(function(){
+      var fullname = 'mongo'
+      var obj = {
+         fullname :'Colin Ihrig',
+         prop: {
+            fullname :'Aurelio De Rosa',
+            getFullName :function(){
+               return this.fullname
+            }
+         }
+      }
+
+      console.log(obj.prop.getFullName())  // Aurelio De Rosa
+      var test = obj.prop.getFullName; 
+      console.log(test())  // John Doe
+   })();
+
+   // code 11
+   ;(function(){
+      var x = y = z = 1;
+   })();
+   // console.log(x)  // not defined
+   console.log(y)  // 1
+   console.log(z)  // 1
+
+   // code 12  1、实现对该数组的倒排   2、实现该数组的降序排序(根据a从大到小)
+   // 3、 请用Math.max() 取出数组中的最大值(不许用遍历)
+   ;(function(){
+      var array = [{a:4, b:5}, {a:2, b:3}, {a:5, b:2}, {a:0, b:5}]
+      // 实现该数组的倒排
+      array.reverse()
+      console.log(array)  //  [{a:0, b:5}, {a:5, b:2}, {a:2, b:3}, {a:4, b:5}]
+
+      // 实现该数组降序排序
+      array.sort(function(json1, json2){
+         return json2.a - json1.a
+      })
+      console.log(array)
+      var a = [1, 3, 4, 0, 2, 55];
+      Math.max(a)
+      console.log(Math.max.apply(null,a))
+   })();
+
+   // code 13
+   var o = 1, p = q = 0;
+   function add(n){
+      return n = n+2
+   }
+   p = add(o)
+   console.log(p)  // 4
+   function add(n){
+      return n = n+3
+   }
+   console.log(o)  // 1
+   q = add(o)
+   console.log(q)  // 4
+
+   // code 14  
+   ;(function(){
+      var a = 1;
+      var b = 2;
+      a = a + b;
+      b = a - b;
+      a = a - b;
+      console.log(a+'-----'+b)
+   })();
+
+   // code 15
+   function Foo() {
+      getName = function () { 
+         console.log (1); 
+      };
+      console.log('this is'+this)
+       return this;
+   }
+   Foo.getName = function () { 
+      console.log (2); 
+   };
+   Foo.prototype.getName = function () { 
+      console.log('baidu' && 'google'); 
+   };
+   getName();   // 5
+   var getName = function () { 
+      console.log (4);
+   };
+   function getName() { 
+      console.log (5);
+   }
+
+   // 请写出一下的输出结果
+   Foo.getName();  // 2
+   getName();   // 4
+   Foo().getName();  // 1
+   getName();  // 1
+   new Foo.getName();   // 2
+   new Foo().getName();  //  google
+   new new Foo().getName();   //   google
+
+   // code 16
+   ;(function(){
+      // 要求1 请校验手机号码：
+      var reg1 = /^1[34578]\d{9}/;
+      var mobileNumber = '1234567896';
+      console.log(reg1.test(mobileNumber));  // false
+
+      // 要求2 请校验11N 或者 12N 或者 1NNN开头的，后面跟7位或者8位的手机号
+      var reg2 = /^(11N)|(12N)\d{8}$|^1NNN\d{7}$/;
+      var phoneNumber = '3NNN2345678';
+      console.log(reg2.test(phoneNumber));  // false
+
+      // 要求3 纯数字但是包括小数点
+      var reg3 = /^\d+(\.\d+)?$/;
+      var str1 = '33a.33';
+      console.log(reg3.test(str1));   // false
+
+      // 要求4 纯数字但是不包小数点
+      var reg4 = /^[1-9]\d*$|^0$/;
+      var str2 = '034290';
+      console.log(reg4.test(str2));   // false
+
+      // 请输入2~6位汉字
+      var reg5 = /[\u4e00-\u9fa5]{2,6}/g;
+      var str5 = '名字';
+      console.log(reg5.test(str5) // true
+   })();
+
+/****************************************************************************************
+ * [for 循环 看好是等号不是加等于]
+ * @param  {Number} var i             [description]
+ * @param  {[type]} j   [description]
+ * @return {[type]}     [description]
+ */
+for(var i=0,j=0; i<10, j<6; i++,j++){
+   k = i+j;
+   console.log(k)
+}
+console.log(i)    // 6
+console.log(j)   // 6
+console.log(k)  // 10
+
+
+/****************************************************************************************
+ * [oBtn 事件对象event 兼容性写法]
+ * @type {[type]}
+ */
+var oBtn = document.getElementsByTagName('input')[0];
+oBtn.onclick = function (e){
+   // 事件对象 不兼容 
+   var e = e || window.event;
+   // 阻止冒泡
+    e.stopProPagation ? e.stopProPagation() : (e.cancelBubble = true);
+   return e.pageX || e.clientX + document.body.scrollLeft;  // 获取光标水平位置
+                 // IE版本
+   console.log(e);
+}
+
+/****************************************************************************************
+ * [getBytes 求一个字符串的字节长度]
+ * @param  {[type]} str [description]
+ * @return {[type]}     [description]
+ */
+function getBytes(str){
+   var bytes = str.length;
+   for(var i =0; i< bytes; i++){
+      if(str.charCodeAt(i) > 255){
+         bytes++ ;
+      }
+   }
+   return bytes
+}
+
+var str = "求一个字符串字节长度，且在0~255之间为一个字节，之外两个字节"
+console.log(getBytes(str))
+
+/****************************************************************************************
+ * [给Array添加forEach方法]
+ * @param  {[type]} !Array.prototype.forEach [description]
+ * @return {[type]}                          [description]
+ */
+if(!Array.prototype.forEach){
+   Array.portotype.forEach = function(fn){
+      for(var i= 0, len = this.length; i<len; i++){
+         fn(this[i], i, this)
+      }
+   }
+}
+["a","b","c"].forEach(function(val, index, arr){
+   console.log(val, "is in position" + index + "out of " + (arr.length -1))
+})
+
+if(!Array.prototype.map){
+   Array.prototype.map = function(fn){
+      for(var i=0, len = this.length; i<len; i++){
+         fn(this[i], i, this)
+      }
+   }
+}
+
+[1,2,3,4,5].map(function(val, index, arr){
+   console.log(val)
+})
+
+/****************************************************************************************
+ * [fn1 和 fn2 存的地址同指向 一个函数]
+ * @return {[type]} [description]
+ */
+var fn1 = function fn2(){
+   console.log( fn1 === fn2 )  // true
+   console.log(typeof fn2)
+   // fn2();  // fn2 是 fn1的替身，但只属于fn1，不属于window
+}
+fn1();  // true
+fn2();  // error - fn2 is not defined
+
+
+// 如果存在 fn2 这个函数，但是和fn1 不是同一个函数
+function fn2(){
+   console.log( fn1 == fn2 )  // false
+}
+// 两个对象做对比的结果是false
+console.log([1,2] == [1,2])
+
+/****************************************************************************************
+ * [foo 如果将foo传进去 那即是hello]
+ * @type {String}
+ */
+var foo = 'hello';
+;(function(){
+   var foo = foo || 'world';
+   console.log(foo)
+})();
+
+/****************************************************************************************
+ * [bubbleSort 数组排序从小到大]
+ * @param  {[type]} arr [description]
+ * @return {[type]}     [description]
+ */
+function bubbleSort(arr){
+   for(var i = 0, len = arr.length; i<len; i++){
+      for(var j = 0, _len = arr.length; j<_len; j++){
+         if(arr[i] < arr[j]){
+            var temp = arr[j];
+            arr[j] = arr[i];
+            arr[i] = temp;
+         }
+      }
+   }
+   return arr;
+}
+
+/**
+ * [quickSort 二分排序或者叫做快速排序]
+ * @param  {[type]} arr [description]
+ * @return {[type]}     [description]
+ */
+function quickSort(arr){
+    // 检查数组个数如果小于等于1的情况
+   if(arr.length <=1) return arr;
+
+   // 选择"基准"（pivot），并将其与原数组分离，再定义两个空数组，用来存放一左一右的两个子集
+   var pivotIndex = Math.floor(arr.length / 2) ;
+   var pivot = arr.splice(pivotIndex, 1)[0];
+   var left = [], right = [];
+   for (var i = 0; i < arr.length; i++){
+　　　　if (arr[i] < pivot) {
+　　　　　　left.push(arr[i]);
+　　　　} else {
+　　　　　　right.push(arr[i]);
+　　　　}
+　　}
+   return quickSort(left).concat([pivot], quickSort(right));
+
+}
+
+var bubbleArr = [6,2,3,7,10,4,8,11,1]
+// console.log(bubbleSort(bubbleArr))
+console.log(quickSort(bubbleArr))
+</script>
+</html>

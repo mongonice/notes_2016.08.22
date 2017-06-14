@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<script src="jquery-1.12.3.min.js"></script>
+	<title>jq对象与js对象之间互转</title>
+</head>
+<body>
+	<input type="button" value="按钮" id="btn1"/>
+	<input type="button" value="点击" id="btn2" hidden/>
+	<div hidden>哈哈哈</div>
+	<input type="hidden">
+</body>
+<script>
+	/**
+	 * date:2017.05.17
+	 * author: mongo
+	 * jq 转 js 对象： [index] || .get(index)
+	 * js 转 jq 对象： $('xxx')
+	 */
+	
+	// js => jq
+	var SBtn = document.getElementById('btn1');   // js对象或者叫dom对象
+	var QBtn = $('#btn1')                         // jq对象
+
+
+	// jq => js
+	var QBtn1 = $('#btn2');
+	QBtn1.click(function(){
+		$(this).val('再次点击');
+	})
+	var SBtn1 = $('#btn2')[0];
+	SBtn1.onclick = function(){
+		alert('I am js object!')
+	}
+	var SBtn2 = $('#btn2').get(0);
+
+	SBtn2.onclick = function(){
+		this.style.color = 'red';
+	}
+
+</script>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	1.  null 只能适用于 typeof检测 ，instanceof 和 construtor 检测一律为 false <br/>
+	2.  instanceof 的左边必须是new 出来的对象或者 {} | [] | function(){}  <br/>
+	3.  constructor 是直接父级，即：自己的亲爸爸 <br/>
+	4.  instanceof  只是父级，或者可以是祖辈的，一层层往上找就行 <br/>
+	5.  两个长相一样的{} 或者 [] 或者function ， 但是不能作比较，就是不相等 <br/>
+</body>
+<script>
+    //  下面是一道面试题：
+	console.log(null instanceof Object)       // false
+	console.log(null == undefined)           // true
+
+    console.log('~~~~~~~~~~~~~~~~以上为专题引子~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+
+    console.log(typeof null)                                       // Object
+    console.log(typeof typeof typeof typeof typeof null)          // string
+    console.log(typeof function(){})                             // function
+    console.log(typeof (1+ undefined))                          // 因为NaN是'number'
+    console.log(typeof {})                                     // object
+    console.log(typeof (() => {})())                          // undefined
+
+    console.log('~~~~~~~~~~~~~~~~以上为typeof~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+   
+	console.log({} instanceof Object)                             // true
+	console.log([] instanceof Object)                            // true
+	console.log([] instanceof Array)                            // true
+	console.log(1 instanceof Number)                           // false
+	console.log('123' instanceof String)                      // false
+	console.log(true instanceof Boolean)                     // false
+	console.log(function(){} instanceof Function)           // true
+	console.log(function(){} instanceof Object)            // true
+
+    console.log('~~~~~~~~~~~~~~~~以上为instanceof~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+
+	console.log('123'.constructor == String)                      // true
+	console.log(true.constructor == Boolean)                     // true
+	console.log({}.constructor == Object)                       // true
+	console.log([].constructor == Object)                      // false
+	console.log([].constructor == Array)                      // true
+	console.log(function(){}.constructor == Function)        // true
+	console.log(function(){}.constructor == Object)         // false 
+
+	console.log('~~~~~~~~~~~~~~~~以上为constructor的用法~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+
+	console.log([1,2] == [1,2])        // false
+    console.log([5] == 5)             // true
+    console.log([5] == '5')          // true
+
+
+
+
+</script>
+</html>

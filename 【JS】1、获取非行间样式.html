@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<style>
+		*{
+			padding:0;
+			margin:0;
+		}
+		.div1{
+			width:200px;
+			height:200px;
+			background:yellow;
+			border:10px solid pink;
+			padding:20px;
+			margin:100px;
+		}
+	</style>
+	<title>获取非行间样式</title>
+</head>
+<body>
+	<div class="div1" style="color:#000"></div>
+</body>
+<script>
+
+    // 封装的获取非行间样式的函数
+	function getStyle(obj, sName){
+		return (obj.currentStyle || getComputedStyle(obj, false))[sName]
+		//          IE                     高级浏览器
+	}
+
+	var oDiv1 = document.getElementsByClassName('div1')[0];
+
+    // 获取行间样式
+    var col = oDiv1.style.color;
+   	console.log(col)  // 'rgb(0,0,0)'
+
+   	// 获取非行间样式
+	oDiv1.innerHTML = getStyle(oDiv1, 'width');
+</script>
+</html>

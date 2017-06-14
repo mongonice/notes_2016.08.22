@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<style>
+         /*
+          * date: 2017.06.05
+          * author: mongo
+          */
+		/*浮动方法*/
+		.clearfix::after{
+			content:'';
+			clear:both;
+			display:block;
+		}
+		.clearfix{
+			zoom:1;
+		}
+		/*.fl{
+			float:left;
+		}
+		.left{
+			width:300px;
+			height:200px;
+			background:red;
+		}
+		.right{
+			height:200px;
+			background:blue;
+			margin-left:300px;
+		}*/
+
+		/*定位方法*/
+		/*.left{
+			position:absolute;
+			width:300px;
+			height:200px;
+			background:red;
+		}
+		.right{
+			height:200px;
+			background:blue;
+			margin-left:300px;
+		}*/
+
+		/* 将父级设置为webkit-box */
+		.parent{
+			display: -webkit-box;
+		}
+		.parent div{
+			height:200px;
+		}
+		.parent div.left{
+			width:200px;
+			background:red;
+		}
+		.parent div.right{
+			-webkit-box-flex: 2;
+			background:pink;
+		}
+		
+		/* 中间自适应 左右两边定宽 */
+		.three{
+			display:-webkit-box;
+			height:300px;
+		}
+        .three div.f{
+        	width:200px;
+        }
+        .three div.m{
+        	-webkit-box-flex:1;
+        }
+        .three div.r{
+        	width:200px;
+        }
+
+	</style>
+	<title>Document</title>
+</head>
+<body>
+	<div class="parent">
+		<div class="left"></div>
+		<div class="right"></div>
+	</div>
+
+	<div class="three">
+		<div class="f" style="background:pink;"></div>
+		<div class="m" style="background:plum;"></div>
+		<div class="r" style="background:gray;"></div>
+	</div>
+</body>
+</html>

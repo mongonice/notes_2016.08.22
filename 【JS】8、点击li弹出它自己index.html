@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<style>
+		*{
+			padding:0;
+			margin:0;
+		}
+		ul,li{
+			list-style:none;
+		}
+		#list>li{
+			width:100%;
+			height:20px;
+			border-bottom:1px solid #ccc;
+		}
+	</style>
+	<title>初始化数组</title>
+</head>
+<body>
+<ul id="list">
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+</ul>
+</body>
+<script>
+var oU = document.getElementById('list');
+var oLi = oU.getElementsByTagName('li');
+
+// for(var i=0, len=oLi.length; i<len; i++){
+// 	oLi[i].index = i;
+// 	oLi[i].onclick = function(){
+// 		this.style.background = 'red'
+// 		alert(this.index)
+// 	}
+// }
+// 
+// 点击第 几个 就弹出 几
+	for(var i=0, len=oLi.length; i<len; i++){
+		;(function(index){
+			oLi[index].onclick = function(){
+				console.log(this)  // 的确为当前的li本身但是人家身上没有index属性
+				console.log(this.index)  // undefined
+				alert(index)   // 一定要注意此处 是index 而非 this.index
+			}
+		})(i);
+	}
+</script>
+</html>

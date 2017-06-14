@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<script src="jquery-1.12.3.min.js"></script>
+	<style>
+		*{padding:0; margin:0;}
+		#btn{
+			width:120px; 
+			height:40px;
+			background:green;
+			margin:100px;
+			color:#fff;
+			border:none;
+		}
+		#div1{
+			position:absolute;
+			font-size:900;
+			color:#390;
+			background:pink;
+			padding:100px;
+			border:1px solid #ccc;
+			left:50%;
+			top:50%;
+			transform:translateX(-50%) translateY(-50%);
+			display:none;
+		}
+	</style>
+	<title>Document</title>
+</head>
+<body>
+	<input type="button" value="显示" id="btn"/>
+	<div id="div1">我是个大弹框</div>
+</body>
+<script>
+	var btn = $('#btn');
+	var div = $('#div1');
+
+	// e.stopPropagation 加给目标元素 targetElement
+	// 点击btn 不能触发父级document的点击事件
+	btn.click(function(e){
+		div.show();
+		$(this).hide();
+		e.stopPropagation();
+	})
+	// 点击 div更不能触发父级document的点击事件
+	div.click(function(e){
+		e.stopPropagation()
+	})
+	// 鼠标按下之后不能选中文本
+	div.mousedown(function(){
+		return false
+	})
+	$(document).click(function(){
+		div.hide();
+	})
+</script>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+<script>
+	;(function(){
+		for(var i=0; i< 6; i++){
+			console.log(i)  //　０,１,２,３,４,５
+		}
+	})();
+
+	;(function(){
+		for(var i=0; i< 6; i++){
+			setTimeout(function(){
+				console.log(i)   // 6,6,6,6,6,6
+			}, 1000)
+		}
+	})();
+
+	;(function(){
+		for(var i=0; i< 6; i++){
+			;(function(j){
+				setTimeout(function(){
+					console.log(j)   // 0,1,2,3,4,5
+				}, 1000)	
+			})(i);
+		}
+	})();
+
+	;(function(){
+		for(var i=0; i<6; i++){
+			;(function(j){
+				setTimeout(function(){
+					console.log(j)   // 1s-0, 2s->1 3s->2...
+				}, 1000*j)	
+			})(i);
+		}
+	})();
+
+   
+	;(function(){
+		var tasks = [];
+		for(var i=0; i<6; i++){
+			var promise = new Promise((resolve) => {
+				resolve(i)
+			})
+			tasks.push(promise)
+		}
+		console.log(tasks)
+		Promise.all(tasks).then((j) => {
+			setTimeout(() => {console.log(j)}, j*1000)
+		})
+	})();
+</script>
+</html>

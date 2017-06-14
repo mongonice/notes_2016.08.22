@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>被选中的下拉列表的索引值</title>
+</head>
+<body>
+	<select name="" id="dropdown">
+		<option value="0">0</option>
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+	</select>
+</body>
+<script>
+	// 被选中的索引值为 oSel.selectedIndex
+	// 所有的options 为 oSel.options
+	var sels = document.getElementById('dropdown');
+	console.log(sels.length)  // 5
+	sels.onchange = function(){
+		console.log(sels.options[sels.selectedIndex].value)
+	}
+	// 创建一个新的option
+	var op = new Option();
+	op.value = 5;
+	op.text = 5;
+	sels.options.add(op)
+
+	// 删除一个option
+	sels.remove(3)  // 移除哪个就写哪个索引值
+</script>
+</html>
