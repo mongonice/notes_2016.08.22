@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<script src="jquery-1.12.3.min.js"></script>
+	<title>Document</title>
+</head>
+<body>
+	<input type="text" id="txt"/>
+</body>
+<script>
+	// oninput事件可以实时监听input框内容改变，但是 只兼容IE9+，而onchange事件也能监听input框内容的变化，但是必须是失去焦点之后才能触发事件
+	// 最后为了兼容IE8-, 所用的事件为 onpropertychange 事件。
+
+	//　最完美的实时监听输入框内容的改变的　事件　为　oninput&onpropertychange
+	var oT = $('#txt')
+
+	oT.get(0).oninput = function(){
+		console.log(2)
+	}
+
+	oT.on('input propertychange', function(){
+		console.log(1)
+	})
+</script>
+</html>

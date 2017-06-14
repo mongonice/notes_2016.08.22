@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>图片的预加载和懒加载</title>
+</head>
+<body>
+	<!--  我看到预加载图片是防止图片由于网络原因而阻止文本的正常加载  -->
+	<div id="div1">
+		<script>
+			var oDiv = document.getElementById('div1');
+        	console.log(oDiv)
+  			var images = new Array()  
+	        function preload() {
+	        	var arg = Array.prototype.slice.call(arguments);
+	            for (i = 0; i < arg.length; i++) {  
+	                images[i] = new Image()
+	                images[i].src = preload.arguments[i]
+	                images[i].onload = function(){
+	                	oDiv.appendChild(this)
+	                }
+	            }  
+	        }  
+	        preload(  
+	            "http://www.zhinengshe.com/works/3525/img/1.jpg",
+	            "http://www.zhinengshe.com/works/3525/img/2.jpg",
+	            "http://www.zhinengshe.com/works/3525/img/3.jpg"
+	        )
+		</script>
+	</div>
+	<div style="width:100%; height:200px; background:red; color:#fff;">
+		预加载和懒加载继续中
+	</div>
+</body>
+</html>

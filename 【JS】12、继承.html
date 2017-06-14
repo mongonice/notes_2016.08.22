@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+<script>
+ function Person(name, age){
+ 	this.name = name;
+ 	this.age = age;
+ }
+ Person.prototype.sayName = function(){
+ 	console.log(this.name)
+ }
+
+ function Teacher(name, age, job){
+ 	// Person.apply(this, [name, age])
+ 	Person.call(this, name, age)
+ 	this.job = job;
+ }
+
+ Teacher.prototype = new Person()
+ Teacher.prototype.sayJob = function(){
+ 	console.log(this.job)
+ }
+
+ var t1 = new Teacher('mongo', 18, 'teacher');
+ t1.sayName();  // 'mongo'
+
+ var t2 = new Teacher('mongo', 18, 'teacher')
+ var t3 = new Teacher('mongo', 18, 'student')
+ t2.sayJob();  // 'teacher'
+ t3.sayJob();  // 'student'
+</script>
+</html>

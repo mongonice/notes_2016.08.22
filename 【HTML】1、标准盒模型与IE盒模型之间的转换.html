@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>信息表</title>
+	<style type="text/css">
+	    /**
+	     *  标准盒模型： contentWidth + padding + border + margin
+	     *  IE盒模型：   [content = (width + padding + border)] + margin
+	     *  两者之间的转换 只需添加： box-sizing:border-box;
+	     *  box-sizing:border-box | content-box | inherit;
+	     */
+		*{
+			padding:0;
+			margin:0;
+		}
+		.div{
+			width:200px;
+			height:200px;
+		}
+		.div1{
+			background:yellow;
+			padding:30px;
+			border:10px solid red;
+			margin:100px;
+		}
+		.div2{
+			background:blue;
+			padding:30px;
+			border:10px solid pink;
+			margin:100px;
+			box-sizing: border-box;
+		}
+	</style>
+</head>
+<body>
+	<div class="div div1" id="oDiv1"></div>
+	<div class="div div2" id="oDiv2"></div>
+</body>
+</html>

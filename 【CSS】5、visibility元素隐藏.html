@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div>
+		1、hidden 给元素添加hidden属性 不占空间<br/>
+		2、display 值为none ，利用css更改样式，使其元素隐藏，不占空间<br/>
+		3、visibility 值为hiddden ， 只是元素隐身而已，但是还是占空间的<br/>
+		4、opacity:0; filter:alpha(opacity=0); 透明度为0， 只是元素隐身而已，但是还是占空间的<br/>
+		6、jq中的.hide()和.show() 其实是用过js来操作 css中的display:none 或者 block<br/>
+
+        注：css里面的display会覆盖html中的hidden属性<br/>
+	</div>
+	<div hidden style="display:block;">hidden 是每个元素的属性，用来将元素隐藏的，不占空间了</div>
+	<div style="display:none">display:none; 通过css将元素隐藏起来，不占空间了</div>
+	<div style="opacity:0; filter:alpha(opacity=0)"> opacity来设置元素的透明度将其设置为透明的，也能让人看不见，但是还是占空间的 </div>
+	<div style="visibility:hidden;">  visibility:hidden; 可见的，让其隐藏，也是占空间的 </div>
+	<div style="position:absolute; left:-9999px; top:-9999px;"> 定位将元素定位到页面之外隐藏起来 </div>
+	<div style="text-indent:-9999px;"> 只适用于文字隐藏 </div>
+</body>
+</html>

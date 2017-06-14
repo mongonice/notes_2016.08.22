@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+<script>
+	function fun(n, o){
+		// var n;
+		// var o;
+		console.log(o)
+		return {
+			fun:function(m){
+				return fun(m,n)
+			}
+		}
+	}
+
+	var a = fun(0);
+	console.log('a='+ a) // undefined  n=0;  {}
+	console.log('a.fun(1)=' + a.fun(1))    // 0 
+	console.log('a.fun(2)=' + a.fun(2))    // 0
+	console.log('a.fun(3)=' + a.fun(3))    // 0
+    console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+	var b = fun(0).fun(1).fun(2).fun(3);   // undefined 0 1 2
+	console.log('b' + b)    // undefined 
+    console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+    var c = fun(0).fun(1);
+	console.log('c' + c)   
+	console.log('c.fun(2)=' + c.fun(2))
+	console.log('c.fun(3)=' + c.fun(3))
+</script>
+</html>

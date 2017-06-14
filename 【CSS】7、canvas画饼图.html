@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="canvas" width="600" height="600"></canvas>
+</body>
+<script>
+	function draw(){
+		var oC = document.getElementById('canvas')
+
+		var oPen = oC.getContext('2d')
+
+		// 饼图的每块颜色
+		var cols = ['red' , 'pink', 'blue' , 'green' , 'plum'];
+
+		// 角度数组
+		var angles = [Math.PI*0.3, Math.PI*0.7, Math.PI*0.2, Math.PI*0.4, Math.PI*0.4]
+
+		var start = 0;
+		var end = 0;
+
+		for(var i=0, len=angles.length; i<len; i++){
+			start = end;
+			end = end + angles[i];
+
+			oPen.beginPath();
+
+			// 填充颜色
+			oPen.fillStyle = cols[i];
+			oPen.moveTo(200, 200)
+			oPen.arc(200, 200, 120, start, end)
+			oPen.lineTo(200,200)
+			oPen.stroke()
+
+			// 填充
+			oPen.fill();
+		}
+	}
+
+	draw();
+</script>
+</html>

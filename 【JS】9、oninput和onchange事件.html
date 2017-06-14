@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="text" id="txt" />
+	<select name="" id="sel">
+		<option value="0">0</option>
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+	</select>
+</body>
+<script>
+	var oTxt = document.getElementById('txt');
+	var oSel = document.getElementById('sel')
+
+	// 时刻输出1 兼容IE9+
+	oTxt.oninput = function (e){
+
+		console.log(1)
+	}
+
+	// 不起作用 因为只兼容IE8以及以下
+	// oTxt.onpropertychange = function(){
+	// 	alert(3)
+	// }
+
+	// onchange 事件是 适用于 input select textarea ，而且是在失去焦点之后事件发生，或者按下enter键
+	// oTxt.onchange = function(){
+	// 	console.log(2)  
+	// }
+	// 
+	// onkeydown时刻都在事件发生， 比如你输入小  x i a o,每一次按键都会触发，最后一个小字能触发5次包括一次空格键
+	// oTxt.onkeydown = function(){
+	// 	console.log(4)
+	// }
+
+	// onkeydown 和onkeyup 基本上执行 的次数是一样的，也是 x i a o，只不过onkeyup是按键起来触发
+	// oTxt.onkeyup = function(){
+	// 	console.log(5)
+	// }
+
+	// onkeypress 是当按下空格键的时候或者回车键才触发事件？
+	// oTxt.onkeypress = function(){
+	// 	console.log(6)
+	// }
+
+	oSel.onchange = function(){
+		console.log(2)
+	}
+</script>
+</html>

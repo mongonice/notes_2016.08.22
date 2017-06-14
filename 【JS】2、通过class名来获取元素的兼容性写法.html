@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>通过class名来获取元素的兼容性写法</title>
+</head>
+<body>
+	<div class="div1">是</div>
+	<div class="obox div1">是</div>
+	<div class="obox div1 div2">是</div>
+	<div class="div4"></div>
+	<div class="div1 div5"> 是 </div>
+	<p class="content"></p>
+	<div class="div1div1"></div>
+	<span class="div div2"></span>
+</body>
+<script>
+	function getElebyClass(sName){   //4
+		var allEles = document.getElementsByTagName('*');
+		console.log(allEles.length)
+		var reg = new RegExp('\\b' + sName + '\\b');
+					// 当正则中有变量的时候，要用new 来声明 
+				   // \\b是边界 
+		          // 万一遇到这种 acdiv1 包含div1， 所以 是 带边界的 div1 
+		var needEles = [];
+		for(var i=0, len = allEles.length; i<len; i++){
+			console.log(allEles[i].className)
+			if(reg.test(allEles[i].className)){
+				needEles.push(allEles[i])
+			}
+		}
+		return needEles;
+	}
+
+	var oDiv1s = getElebyClass('div1');
+	console.log(oDiv1s.length)   // 4
+</script>
+</html>

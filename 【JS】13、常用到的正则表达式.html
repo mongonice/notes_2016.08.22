@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+<script>
+
+	/**
+	 * 正则匹配基本的格式
+	 * 1、邮箱基本构成： 以大小写字母或者数字开头，且可以包括[a-z A-Z 0-9 - _] @ [a-z 0-9]大于0个  .com可以有1个或者两个
+	 */
+	var reg_mail = /^[a-zA-Z0-9]\w+@[a-z0-9]+(.[a-z0-9]+){1,2}$/g;
+
+	var str_mail = '123@163.vip.com'
+	console.log(reg_mail.test(str_mail))
+
+
+	var test = 'aa{mongo}haha{tata}cc{only}dd'
+
+	test = test.replace(/\{(\w+)\}/gi, function(val, index, _index){
+		console.log(val+index+_index)
+	})
+
+</script>
+</html>

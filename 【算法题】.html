@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+<script>
+// 这是插件实现了两个功能 : 一个是去重，一个是相邻的去重
+;(function(){
+	var plugins = {
+		// 数组字符串去重
+		delRepeat:function(opt){
+			var bool = Object.prototype.toString.call(opt).slice(8, -1);
+			var opt = bool == 'Array' ? opt : opt.split('');
+			var _opt = [];
+			for(var i=0, len = opt.length; i<len; i++){
+				if(_opt.indexOf(opt[i]) == -1){
+					_opt.push(opt[i])
+				}
+			}
+			return bool == 'Array' ? _opt : _opt.join('');
+		},
+
+	    // 相邻的去重
+		delNeighbor:function(opt){
+			var bool = Object.prototype.toString.call(opt).slice(8, -1);
+			var opt = bool == 'Array' ? opt : opt.split('');
+			for(var i=0; i<opt.length; i++){
+				if(opt[i] == opt[i+1]){
+					opt.splice(i,1);
+					i--
+				}
+			}
+			return bool == 'Array' ? opt : opt.join('');
+		}
+	}
+
+	this.DelRe = plugins;
+
+})();
+
+var arr1 = ['a','a','b','b','c','c']
+var test1 = DelRe.delRepeat(arr1)
+console.log(test1)
+
+var str1 = 'aabbccddefgaaacccdd'
+var test2 = DelRe.delNeighbor(str1)
+console.log(test2)
+
+
+
+// 去重方法2
+function quChong(opt){
+	var bool = Object.prototype.toString.call(opt).slice(8, -1);
+	var opt = bool == 'Array' ? opt : opt.split('');
+	var _opt = [];
+	for(var i=0; i<opt.length; i++){
+		// 如果 没有找到 就push进去
+		if(!findEleFromOpt(_opt, opt[i])){
+			_opt.push(opt[i])
+		}
+	}
+	return bool == 'Array' ? _opt : _opt.join('');
+
+}
+
+// 某一元素是否在那个对象里面，有返回true 没有返回false
+function findEleFromOpt(opt, ele){
+	var bool = Object.prototype.toString.call(opt).slice(8, -1);
+	var opt = bool == 'Array' ? opt : opt.split('');
+	for(var i=0; i<opt.length; i++){
+		if(ele == opt[i]){
+			return true;
+		}
+	}
+	return false;
+}
+
+var str2 = 'aabbddd';
+var test3 = quChong(str2)
+console.log(test3)
+
+
+// 让数组随机排序方法1
+function randomRange(arr){
+	arr = arr.sort(function(){
+		return Math.random()-0.5
+	})
+
+	return arr;
+}
+
+// 让数组随机排序方法2
+function randomOrder(arr){
+	var newArr = [];
+	for(var i=0; i<arr.length; i++){
+		var index = Math.floor(Math.random()*(arr.length-1))
+		newArr.push(arr[index])
+		arr.splice(index, 1)
+		console.log('长度'+arr.length)
+		i--;
+	}
+	return newArr;
+}
+// 验证
+var arr_ = [12,1,4,0,8,22,13]
+console.log(randomOrder(arr_))
+
+function minCommonMultiple(a, b){
+	var max = a, min = b;
+	(a<b) && (max = b, min = a)
+	var i = 1;
+	while((max*i%min) != 0){
+		i++
+	}
+	return max*i
+}
+console.log(maxCommonDivisor(12,8))
+
+function maxCommonDivisor(a ,b){
+	var max = a, min = b;
+	(a<b) && (max = b, min = a)
+	var i = min;
+	while(!(max%i == 0 && min%i == 0)){
+		i--
+	}
+	return i
+}
+
+
+// 算法值两数之和
+function twoSum (nums,target){
+	var array_index = [];
+	if(nums.length>0){
+		if(nums.length == 1){
+			if(nums[0] == target/2){
+				array_index[0] = 0;
+			}
+		}else{
+			for(var i=0, len=nums.length; i<len; i++){
+				for(var j=1,len1=nums.length-1; j<len1; j++){
+					if( (nums[i]+nums[j]) == target){
+						array_index[0] = j;
+						array_index[1] = i;
+						console.log(array_index);
+						console.log('i='+i)
+						console.log('j='+j)
+					}
+				}
+			}
+		}
+		return array_index;
+	}else{
+		return -1;  // 当nums=[]时
+	}
+}
+
+var array = [1,4,6,5,3,9]
+var t = 14
+twoSum(array,t)
+console.log(twoSum(array,t))
+console.log(twoSum([],t))
+console.log(twoSum([14],t))
+console.log(twoSum([7],t))
+</script>
+</html>
