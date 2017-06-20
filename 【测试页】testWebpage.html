@@ -9,13 +9,146 @@
 	<div style="width:200px; height:200px; background:red"></div>
 </body>
 <script>
-var i =0;
-// $(document).on('click mouseleave',function(){
-// 	return false;
-// })
-$('div').on('mouseleave click',function(event){
-	event.stopPropagation();
-	console.log(i++)
-})
+/*! migc-game-sites 2017-03-21 */
+$(function() {
+	function a(a) {
+		var b = $('<div class="mask"></div>'),
+			c = $("<div></div>").addClass(a).css({
+				height: $(window).height() + "px"
+			});
+		b.append(c), $(document.body).css({
+			position: "relative"
+		}).append(b), b.on("touchend", function(a) {
+			b.remove(), $(document.body).css({
+				position: "normal"
+			}), a.preventDefault()
+		})
+	}
+	function b() {
+		return /MicroMessenger/i.test(navigator.userAgent)
+	}
+	function c() {
+		return /(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent) ? "ios" : /(Android)/i.test(navigator.userAgent) ? "android" : "pc"
+	}
+	function d(a) {
+		function b() {
+			return f = jwplayer(a.videoWarp).setup({
+				width: h,
+				height: i,
+				html5player: "../js/jwplayer/jwplayer.html5.js",
+				playlist: [{
+					image: a.poster,
+					sources: [{
+						file: a.src
+					}]
+				}],
+				primary: "html5",
+				controls: !0,
+				events: {
+					onComplete: function() {},
+					onStop: function() {},
+					onReady: function() {},
+					onPlay: function() {},
+					onPause: function() {},
+					onBuffer: function() {},
+					onDisplayClick: function() {},
+					onBufferChange: function() {},
+					onBufferFull: function() {},
+					onError: function(a, b) {}
+				}
+			})
+		}
+		if ("android" == c && e()) {
+			var d = $(a.container).addClass("mibrower");
+			$("#" + a.videoWarp).css("height", d.height() - d.find(".close").height() + "px")
+		}
+		var f = null,
+			g = $("#" + a.videoWarp),
+			h = g.width(),
+			i = g.height();
+		return b
+	}
+	function e() {
+		return !!(/MiuiBrowser/i.test(navigator.userAgent) || /QQ/i.test(navigator.userAgent) || /MicroMessenger/i.test(navigator.userAgent))
+	}
+	$("img.lazy").lazyload({
+		threshold: "500"
+	});
+	var f = mi.util.getQueryVal("channel", url),
+		g = "pong",
+		h = "161214_586102",
+		i = {
+			curpageid: h,
+			type: g + "_" + f,
+			activity: g,
+			fuid: "",
+			cid: g + "_" + f + "_activity"
+		};
+	i.fuid = "showed", mi.util.sendStatistic(i);
+	var j = Swipe(document.getElementById("loop_list"), {
+		startSlide: 0,
+		speed: 400,
+		auto: 3e4,
+		continuous: !0,
+		activeId: "actives",
+		nav: "loop-nav",
+		touchend: function(a, b) {},
+		transitionEnd: function(a, b) {
+			$(".loop-nav li").removeClass("active").eq(a).addClass("active")
+		}
+	}),
+		j = Swipe(document.getElementById("screenshots-banner-warp"), {
+			startSlide: 0,
+			speed: 400,
+			auto: !1,
+			continuous: !0,
+			activeId: "active",
+			nav: "nav",
+			touchend: function(a, b) {},
+			transitionEnd: function(a, b) {
+				$(".nav li").removeClass("active").eq(a).addClass("active")
+			}
+		});
+	$(".screenshots-banner-li li,.loop_list li").css("display", "block"), setTimeout(function() {
+		$(".screenshots-banner-li li").removeClass("hidden")
+	}, 1e3), $(".arrow-left").on("touchend", function() {
+		j.prev()
+	}), $(".arrow-right").on("touchend", function() {
+		j.next()
+	});
+	var k = "touchend";
+	"pc" === mi.util.checkOperaSys() && (k = "click"), $(".download").on(k, function() {
+		return b() ? void a("download_weixin") : (i.fuid = "download", _hmt.push(["_trackEvent", "channel", "download", f]), "gamecenter" === f || "gamecenter_push" === f ? window.location = "migame://46606" : "meng_1084_1_android" === f ? o(download_url + "?channel=" + f + "&nav=none") : "" === f && window.JsBridge ? window.location = "migame://46606" : window.location = download_redirect + "?channel=" + f, mi.util.sendStatistic(i), void 0)
+	});
+	var l = null;
+	$("#playVideo").on(k, function() {
+		var a = $(this),
+			b = a.attr("data-url"),
+			c = a.attr("data-bg");
+		getPlayer = d({
+			container: ".video-alert",
+			videoWarp: "myvideo",
+			src: b,
+			poster: c
+		}), $(".video-alert").addClass("video-alert_show"), l = getPlayer(), l.play()
+	}), $("#video_wrapper .close").on(k, function() {
+		$(".video-alert").removeClass("video-alert_show"), $("#myvideo").children().remove(), l = null
+	});
+	var m = function() {
+			try {
+				if (WE) return !0
+			} catch (a) {}
+			return !1
+		},
+		n = function(a, b) {
+			try {
+				if (WE && WE.trigger) return "string" != typeof b && (b = JSON.stringify(b)), WE.trigger(a, b)
+			} catch (c) {}
+			return !1
+		},
+		o = function(a) {
+			m() ? n("opennew", a) : location.href = a
+		}
+});
 </script>
 </html>

@@ -17,6 +17,9 @@
     /* 方案3：给父级加个clearfix */
     .clearfix::after{display:block; clear:both; content:'';}
     .clearfix{zoom:1;}
+    #divb{
+        color:#000;
+    }
 </style>
 <title>清除浮动方法汇总</title>
 </head>
@@ -26,6 +29,6 @@
     	<div class="div2"></div>
     	<!-- <div class="clear"></div> -->
     </div>
-    <div class="divb">艾玛，我怎么在这个位置呢？</div>
+    <div id="divb" style="color:pink">艾玛，我怎么在这个位置呢？</div>
 </body>
 </html>
