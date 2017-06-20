@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<style>
+		*{
+			padding:0;
+			margin:0;
+		}
+		.clearfix::after{
+			clear:both;
+			display:block;
+			content:'';
+		}
+		.clearfix{
+			zoom:1;
+		}
+		ul,li{
+			list-style:none;
+		}
+		.list{
+			width:300px;
+			margin:100px auto;
+		}
+		.list>li{
+			float:left;
+			width:30%;
+			text-align:center;
+			cursor:pointer;
+			color:pink;
+		}
+		.list>li.active{
+			color:#f72c66;
+		}
+	</style>
+	<title>Document</title>
+</head>
+<body>
+	<div style="width:300px; line-height:100px; color:#f72c66; margin:50px auto; font-size:24px;">
+		此场景是用来实现导航tab切换功能
+	</div>
+	<ul class="list clearfix">
+		<li class="active">
+			<img src="images/home-off.png" alt="" data-src="images/home-on.png"><br>
+			首页
+		</li>
+		<li>
+			<img src="images/food-off.png" alt="" data-src="images/food-on.png"><br>
+			功能
+		</li>
+		<li>	
+			<img src="images/user-off.png" alt="" data-src="images/user-on.png"><br>
+			我的
+		</li>
+	</ul>
+</body>
+<script src="jquery-1.12.3.min.js"></script>
+<script>
+	var oTab = $('.list>li');
+
+	var srcArr = []   // 用来存放本身的src的url地址
+	// 先循环一遍，看看哪条li上面有active ，则让此条的img src 更换为data-src的url
+	oTab.each(function(index){
+		srcArr.push($(this).find('img').attr('src'))
+		if($(this).hasClass('active')){
+			var _src = $(this).find('img').attr('data-src')
+			$(this).find('img').attr('src', _src)
+		}
+	})
+
+	// 点击切换的时候
+	oTab.click(function(){
+		var _this = $(this)
+		// 现将文字变色
+		oTab.removeClass('active')
+		_this.addClass('active')
+
+		// 在变幻图标
+		oTab.each(function(index){
+			$(this).find('img').attr('src', srcArr[index])
+		})
+		var _src = _this.find('img').attr('data-src')
+		_this.find('img').attr('src', _src)
+	})
+</script>
+</html>

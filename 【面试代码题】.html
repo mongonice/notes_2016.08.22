@@ -5,94 +5,125 @@
 	<title>Document</title>
 </head>
 <body>
-	
 </body>
 <script>
+/******************************* CODE 01. *******************************
+ * 考察隐士类型的转换
+ */
+;(function(){
+   var foo = 10 + '20';
+   console.log(foo) // 1020
+   var str = '123abc'
+   console.log( str++ )  // NaN
+   console.log(['5'] == 5)  // true
+})();
 
-	// code 1: 考察隐士类型转换
-	;(function(){
-      var foo = 10 + '20';
-      console.log(foo)  // 1020
-      var str = '123abc'
-      console.log( str++ )  // NaN
-      console.log(['5'] == 5)    // true
-   })();
 
-	// code 2
-	;(function(){
-      add(2,5)
-      function add(a, b){
-         console.log( a+b )  // 7
+
+/******************************* CODE 02. *******************************
+ * 链式函数调用
+ */
+;(function(){
+   add(2,5)
+   function add(a, b){
+      console.log( a+b )  // 7
+   }
+   add1(2)(5)
+   function add1(a){
+      return function(b){
+         console.log(a + b)  // 7
       }
-      add1(2)(5)
-      function add1(a){
-         return function(b){
-            console.log(a + b)  // 7
-         }
-      }
-   })();
+   }
+})();
 
-	// code 3  hog a lasagna I'm
-	console.log("I'm a lasagna hog".split(' ').reverse().join(' '))
-	
-   // code 4 
-   window.Foo || (window.Foo = "bar")
-   console.log(window.Foo)  // bar
 
-   // code 5
+
+/******************************* CODE 03. *******************************
+ * 翻转字符串的方法：先split变数组 再 reverse() 在join() 成字符串
+ * 结果：hog a lasagna I'm
+ */
+console.log("I'm a lasagna hog".split(' ').reverse().join(' '))
+
+
+
+/******************************* CODE 04. *******************************
+ * 考察的是 || 或者 && 逻辑运算符的运算
+ */
+window.Foo || (window.Foo = "bar")
+console.log(window.Foo)  // bar
+
+
+
+/******************************* CODE 05. *******************************
+ * ;()(); 其实模拟了块函数的作用域问题，块函数中定义的变量只能在块函数中生效
+ */
+;(function(){
+   var say1 = 'hello';
    ;(function(){
-      var say1 = 'hello';
-      ;(function(){
-            var bar = 'world';
-            console.log(say1 + bar)   // helloworld
-      })();
-      // console.log(say1 + bar)  // bar is not defined
+         var bar = 'world';
+         console.log(say1 + bar)   // helloworld
    })();
-   
-   // code 6  代码块避免变量污染
-   (function(){
-   		var Foo = [];
-   		Foo.push(1);
-   		Foo.push(2);
-   		console.log(Foo.length)  // 2
-   })()
+   // console.log(say1 + bar)    // bar is not defined
+})();
 
-   // code 7
-   ;(function(){
-   		var foo = {n : 1};
-   		var bar = foo;
-   		foo.x = foo = {n:2};
-   		console.log(foo.x)  // undefined
-   		console.log(bar.x)  // {n : 2}
-   })();
 
-   // code 8 考察的是 var f1 = function(){console.log(1)} var f2 = function(){console.log(1)} 但是f1 = f2因为指针不同
-   // var f1 = function(){console.log(1)} var f2 = f1; 这才真正指的同一个函数呢，因为指针相同！！！
-   ;(function(){
-      function Foo(){
-         var i=0;
-         return function(){
-            console.log(i++)
-         }
+  
+/******************************* CODE 06. *******************************
+ * 
+ */
+;(function(){
+		var Foo = [];
+		Foo.push(1);
+		Foo.push(2);
+		console.log(Foo.length)  // 2
+})();
+
+
+
+/******************************* CODE 07. *******************************
+ * 考察了 对象的引用、以及 点运算符的优先级高
+ */
+;(function(){
+		var foo = {n : 1};
+		var bar = foo;
+		foo.x = foo = {n:2};
+		console.log(foo.x)  // undefined
+		console.log(bar.x)  // {n : 2}
+})();
+
+
+
+/******************************* CODE 08. *******************************
+ * var f1 = function(){console.log(1)}; var f2 = function(){console.log(1)} 
+ *     但是f1 和 f2不相等，因为存储的指针不同
+ * var f1 = function(){console.log(1)}; var f2 = f1
+ *     f2 和 f1的指针相同
+ */
+;(function(){
+   function Foo(){
+      var i=0;
+      return function(){
+         console.log(i++)
       }
+   }
 
-      var f1 = Foo(), f2 = Foo();
-      f1();  // 0
-      f1();  // 1
-      f2();  // 0
+   var f1 = Foo(), f2 = Foo();
+   f1();  // 0
+   f1();  // 1
+   f2();  // 0
 
-      function Foo1(){
-         var i=0;
-         return function(){
-            console.log(i++)
-         }
+   function Foo1(){
+      var i=0;
+      return function(){
+         console.log(i++)
       }
-      var F1 = Foo1();
-      var F2 = F1;
-      F1();  // 0
-      F1();  // 1
-      F2();  // 2
-   })();
+   }
+   var F1 = Foo1();
+   var F2 = F1;
+   F1();  // 0
+   F1();  // 1
+   F2();  // 2
+})();
 
    // code 9 编写一个函数，参数为 数值型n ，且返回一个数组， 数组存放 2-32之间的随机数
    // 范围为[2, 32] 则 Math.random() 中包含小的不包含大的，所以要变成 33
@@ -236,10 +267,10 @@
       // 请输入2~6位汉字
       var reg5 = /[\u4e00-\u9fa5]{2,6}/g;
       var str5 = '名字';
-      console.log(reg5.test(str5) // true
+      console.log(reg5.test(str5)) // true
    })();
 
-/****************************************************************************************
+/*************************************17***************************************************
  * [for 循环 看好是等号不是加等于]
  * @param  {Number} var i             [description]
  * @param  {[type]} j   [description]
@@ -254,22 +285,22 @@ console.log(j)   // 6
 console.log(k)  // 10
 
 
-/****************************************************************************************
+/*************************************18***************************************************
  * [oBtn 事件对象event 兼容性写法]
  * @type {[type]}
  */
-var oBtn = document.getElementsByTagName('input')[0];
-oBtn.onclick = function (e){
-   // 事件对象 不兼容 
-   var e = e || window.event;
-   // 阻止冒泡
-    e.stopProPagation ? e.stopProPagation() : (e.cancelBubble = true);
-   return e.pageX || e.clientX + document.body.scrollLeft;  // 获取光标水平位置
-                 // IE版本
-   console.log(e);
-}
+// var oBtn = document.getElementsByTagName('input')[0];
+// oBtn.onclick = function (e){
+//    // 事件对象 不兼容 
+//    var e = e || window.event;
+//    // 阻止冒泡
+//     e.stopProPagation ? e.stopProPagation() : (e.cancelBubble = true);
+//    return e.pageX || e.clientX + document.body.scrollLeft;  // 获取光标水平位置
+//                  // IE版本
+//    console.log(e);
+// }
 
-/****************************************************************************************
+/************************************19****************************************************
  * [getBytes 求一个字符串的字节长度]
  * @param  {[type]} str [description]
  * @return {[type]}     [description]
@@ -287,7 +318,7 @@ function getBytes(str){
 var str = "求一个字符串字节长度，且在0~255之间为一个字节，之外两个字节"
 console.log(getBytes(str))
 
-/****************************************************************************************
+/*********************************20*******************************************************
  * [给Array添加forEach方法]
  * @param  {[type]} !Array.prototype.forEach [description]
  * @return {[type]}                          [description]
@@ -315,7 +346,7 @@ if(!Array.prototype.map){
    console.log(val)
 })
 
-/****************************************************************************************
+/**********************************21******************************************************
  * [fn1 和 fn2 存的地址同指向 一个函数]
  * @return {[type]} [description]
  */
@@ -335,20 +366,24 @@ function fn2(){
 // 两个对象做对比的结果是false
 console.log([1,2] == [1,2])
 
-/****************************************************************************************
- * [foo 如果将foo传进去 那即是hello]
- * @type {String}
+
+
+/******************************* CODE 22. *******************************
+ * 一定要注意函数内部也定义了 var foo
  */
 var foo = 'hello';
 ;(function(){
-   var foo = foo || 'world';
-   console.log(foo)
+   console.log('因为在函数内部定义了 foo =' + foo)  // undefined
+   // foo = foo || 'world'
+   var foo = foo || 'world';  //  undefined || 'world'
+   console.log()
+   console.log('最终的foo= ' + foo)  //  'world'
 })();
 
-/****************************************************************************************
- * [bubbleSort 数组排序从小到大]
- * @param  {[type]} arr [description]
- * @return {[type]}     [description]
+
+
+/******************************* CODE 23. *******************************
+ * 一定要注意函数内部也定义了 var foo
  */
 function bubbleSort(arr){
    for(var i = 0, len = arr.length; i<len; i++){
@@ -363,11 +398,8 @@ function bubbleSort(arr){
    return arr;
 }
 
-/**
- * [quickSort 二分排序或者叫做快速排序]
- * @param  {[type]} arr [description]
- * @return {[type]}     [description]
- */
+/***************quickSort 快速排序********************/
+
 function quickSort(arr){
     // 检查数组个数如果小于等于1的情况
    if(arr.length <=1) return arr;
@@ -388,7 +420,218 @@ function quickSort(arr){
 }
 
 var bubbleArr = [6,2,3,7,10,4,8,11,1]
-// console.log(bubbleSort(bubbleArr))
-console.log(quickSort(bubbleArr))
+console.log('快速排序的bubbleArr = ' + quickSort(bubbleArr))
+
+
+
+/******************************* CODE 24. *******************************
+ * 如何将浮点数的 小数点 左边的 部分每隔 三位  加一个 逗号 如12,000,000,000.11 
+ * 浮点型 用 f来表示，因为是float代表浮点型
+ */
+// 方法1： 调用 toLocalString() 的方法
+// 方法2：
+function formatNum(f){
+   var str = f+''   // 将浮点型 转换成 字符串
+   var str_q = ''   // 小数点前
+   var str_h = ''   // 小数点后
+
+   if(str.indexOf('.') !== -1){
+      str_h = str.split('.')[1]
+      // 对称颠倒
+      str = str.split('.')[0].split('').reverse().join('')
+   }
+   for(var i=0; i<str.length; i++){
+      var temp = str.charAt(i)
+      if(i % 3 == 2){
+         temp = str.charAt(i) + ',' 
+      }
+      if((i == str.length-1) && (i%3 == 2)){
+         temp = str.charAt(i)
+      }
+      str_q += temp
+   }
+
+   str_q = str_q.split('').reverse().join('')
+   str_q = str_h ? str_q + '.' + str_h : str_q + '00'
+   return str_q
+}
+console.log(formatNum(232321456.236))
+
+
+
+/******************************* CODE 25. *******************************
+ * 
+ */
+var kk = cc = 0;
+function aa(n){
+   return n ? (n-1)*aa(n-1) : n;
+   kk++; 
+   cc++;
+   if( cc >10 ) return cc
+}
+console.log('kk=' + kk)
+console.log('cc=' + kk)
+console.log(aa(5))
+
+
+
+/******************************* CODE 26. *******************************
+ * 如何将浮点数的 小数点 左边的 部分每隔 三位  加一个 逗号 如12,000,000,000.11 
+ * 浮点型 用 f来表示，因为是float代表浮点型
+ */
+// ;(function(){
+//    function Fn(str){
+//       this.str = str
+//    }
+//    Fn.prototype.format = function(){
+//       var args = Array.prototype.slice.call(arguments)
+//       return this.str.replace(/{\d}/g, function(val, index){
+//          return args[index] || ''
+//       })
+//    }
+
+//    var t = new Fn('<p><a href="{0}">{1}</a><span>{2}</span></p>')
+//    t.format()
+//    console.log( t.format() )
+// })();
+
+
+// var obj = {
+//    name: 'obj',
+//    close:function(){
+//       this.name = 'close'
+//       return function(){
+//          return this.name
+//       }
+//    }
+// }
+
+//    console.log(obj.close().call(this))
+
+
+
+/******************************* CODE 27. *******************************
+ * 实现sum(1, 2, 'welcome', '192.168.2') 中不定参数的求和，且如果不是数字就过滤掉
+ * isNaN() 来检测是否为数字
+ */
+function sum (){
+   var sum = 0;
+   var args = Array.prototype.slice.call(arguments)
+ 
+   for(var i=0; i<args.length; i++){
+      // 判断是不是 数字型
+      if( !isNaN(args[i]) ){
+         sum += args[i]
+      }else{
+         args.splice(i, 1)
+         i--
+      }
+   }
+   return sum
+}
+console.log('不定参数求和sum= '+ sum(1, 2, 'welcome', '192.168.0.1'))
+
+
+
+/******************************* CODE 28. *******************************
+ * 判断是否为数组
+ */
+
+function isArray(arr){
+   return Object.prototype.toString.call(arr).slice(8, -1) == 'Array'
+}
+
+
+
+/******************************* CODE 29. *******************************
+ * ;()(); 立即执行函数的this永远指向 window?
+ */
+var mongo = {
+   p1: 'bar',
+   func: function(){
+      var _this = this
+      console.log( this )
+
+      console.log('1='+ this.p1)   //  bar 
+      console.log('2='+ _this.p1)  //  bar
+
+      ;(function(){
+         console.log('看看这个this到底是谁？='+ this)  // [object window]
+         console.log('3='+ this.p1)   //  undefined
+         console.log('4='+ _this.p1)  //  bar
+      })();
+   }
+}
+
+mongo.func()
+
+
+
+/******************************* CODE 30. *******************************
+ * 
+ */
+console.log(parseInt('X8X8') + parseFloat('8'))  // NaN
+
+
+
+/******************************* CODE 31. *******************************
+ * 
+ */
+var donkey = 2;
+var fool = (function(){
+   var donkey = 3;
+   return function(){
+      donkey++
+      console.log(donkey)
+   }
+})();
+
+fool();  // 4
+fool();  // 5
+
+
+
+/******************************* CODE 32. *******************************
+ * 
+ */
+window.val = 1;
+var json = {
+   val: 10,
+   dbl: function(){
+      this.val*= 2
+   }
+}
+json.dbl();
+var dbl = json.dbl;
+dbl();
+json.dbl.call(window)
+console.log(window.val + json.val)  // 24
+
+
+
+/******************************* CODE 33. *******************************
+ * 考察的是闭包、 this的指向问题
+ * this 指向的是 window，闭包只能延长 n的作用域链
+ * 闭包只是延长函数内部 变量 的作用域链，谁是 变量 就延长谁
+ */
+function trick(){
+   var n = 99;
+   nAdd = function (){
+      this.n +=1;
+      // n +=1;   // 如果是这样写， 则下面的结果 为 99 100 100
+      //console.log(n)
+      console.log(this.n)
+   }
+
+   function fun2(){
+      console.log(n)
+   }
+   return fun2
+}
+
+var res = trick();
+res()    // 99
+nAdd()  // NaN
+res()  // 99
 </script>
 </html>
