@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+<script>
+	// ES5  创建一个构造函数(类) 且继承一个类
+	function Point(x, y){
+		this.x = x;
+		this.y = y;
+	}
+	Point.prototype.toSay = function(){
+		console.log(this.x + this.y)
+	}
+	// 构造继承属性，一定记住也要将 x y 传进来
+	function ColorPoint(x, y, color){
+		Point.call(this, x, y)  // 注意注意！！！
+		this.color = color
+	}
+	// 原型继承方法
+	ColorPoint.prototype = new Point();
+
+	// 自己的特别的方法咯
+	ColorPoint.prototype.toPint = function(){
+		console.log( 'end'+ this.x + this.y + this.color)
+	}
+	// 走一个
+	var col = new ColorPoint('a', 'b', 'pink')
+	col.toPint();
+
+/***********************************************************/
+
+	// ES6
+	class Es6Point{
+		constructor(x, y) {
+			this.x = x;
+			this.y = y;
+		}
+		toSay() {
+			console.log(this.x + this.y)
+		}
+	}
+
+	
+	// 此句话翻译： 名叫Es6ColorPoint类 是由 名为Es6Point类扩展而来
+	// 如果单独的这么写就一模一样没什么卵用
+	// class Es6ColorPoint extends Es6Point
+
+	// 看点有用的
+	class Es6ColorPoint extends Es6Point{
+		constructor(x, y, color) {
+			super(x, y);  // 等同于super.constructor(x, y)
+			this.color = color;
+		}
+		toSay() {
+			console.log(super(x, y) + this.color)
+		}
+		toPint() {
+			console.log('end' + super(x, y) + this.color)
+		}
+	}
+
+	var es6Col = new Es6ColorPoint('mongo', 'nice', 'colorful')
+	es6Col.toSay();
+
+</script>
+</html>

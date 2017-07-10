@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+	
+</body>
+<script>
+// 声明一个fn的函数第一种方式
+function fn(x){
+	return x*x
+}
+
+fn(2)
+console.log(fn(2)) // 4
+
+// 声明一个fn1的函数第二种方式构造器
+var fn1 = new Function("x", "return x*x")
+fn1(2)
+console.log(fn1(2))  // 4
+
+// 引用式声明
+var fn2 = function (x) {
+	return x*x
+}
+console.log(fn2(2)) // 4
+
+
+var fn3 = function xiaoming(x) {
+	return x*x
+}
+// 此时这个xiaoming只是个别名，只能在函数体内使用，外部是无法访问的
+// console.log(xiaoming(2)) 
+console.log(fn3(2)) // 4
+
+
+var json = '{a: 1, b:2}';
+var newJson = eval('(' + json + ')')
+console.log(JSON.stringify(newJson))
+
+var json1 = "{name: 'mongo', age: 18}"
+var newJson1 = new Function("return json1")
+console.log(newJson1(json1))
+
+var a = new Array(3)
+console.log(a.length)
+a[0] = 1;
+a[1] = 2;
+a[2] = 3;
+console.log(a)
+console.log(a.toString())  // 1,2,3
+</script>
+</html>

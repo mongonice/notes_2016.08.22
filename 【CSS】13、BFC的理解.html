@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		.father{
+			background: #ccc;
+			font-size: 200%;
+			color: #fff;
+			text-align: center;
+		}
+		.son1{
+			float: left;
+			width: 200px;
+			background: pink;
+			height: 400px;
+		}
+		.son2{
+			height:800px;
+			background: #390;
+			 /*给子集不浮动的元素加overflow:hidden; */
+			overflow: hidden; 
+		}
+		
+	</style>
+	<title>Document</title>
+</head>
+<body>
+	<div class="father">
+		<div class="son1">我是大儿子(float:left)</div>
+		<div class="son2">我是二儿子(overflow:hidden)</div>
+	</div>
+	<p>注：原来此时用到了BFC的场景,即便是浮动的元素或者定位的元素,但是高度也计算在内！</p>
+</body>
+</html>

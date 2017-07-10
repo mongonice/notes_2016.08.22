@@ -32,13 +32,15 @@
 		}
 
 		var oNew = clone(oPerson);
-		oNew.oName = 'mango';
-		console.log(oPerson.oName)
+		oNew.oName = 'jack';
+		console.log(oPerson.oName)  // 'mongo'
+		console.log(oNew.oName)   // 'jack'
 		oNew.oAge = 27;
-		console.log(oPerson.oAge)
+		console.log(oPerson.oAge)  // 18
+		console.log(oNew.oAge)  // 27
 		console.log(oPerson.oAddress.province); // beijing
 		oNew.oAddress.province = "shanghai";
-		console.log(oPerson.oAddress.province);  // shanghai
+		console.log(oNew.oAddress.province);  // shanghai
 
 		//返回传递给他的任意对象的类
 	function isClass(o){
@@ -92,8 +94,8 @@ function deepClone(obj){
 
 var copyNew = deepClone(oPerson);
 copyNew.oAddress.province = "shanghai";
-console.log(oPerson.oAddress.province);
-console.log(copyNew.oAddress.province);
+// console.log(oPerson.oAddress.province);
+// console.log(copyNew.oAddress.province);
 
 // //返回传递给他的任意对象的类
 // function isClass(o){
@@ -101,5 +103,11 @@ console.log(copyNew.oAddress.province);
 //     if(o===undefined) return "Undefined";
 //     return Object.prototype.toString.call(o).slice(8,-1);
 // }
+// 
+// 
+var a =[1, 2, 3, 4, 5]
+var b = a;
+b[0] = 10;
+console.log(a)
  	</script>
 </html>

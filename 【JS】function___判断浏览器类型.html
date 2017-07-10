@@ -1,12 +1,51 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title>判断不用浏览器的方案</title>
+	<meta charset="UTF-8">
+	<title>判断浏览器</title>
 </head>
 <body>
 </body>
-<script type="text/javascript">
+<script>
+	document.write(navigator.userAgent);
+	function typeBrowser(){
+		var UA = window.navigator.userAgent.toLowerCase();
+
+		// 先判断是否是Opera
+		if(UA.indexOf('opera') !== -1){
+			return "Opera"
+		}
+		if(UA.indexOf('chrome') !== -1){
+			return "Chrome"
+		}
+		if(UA.indexOf('firefox') !== -1){
+			return "FireFox"
+		}
+		if(UA.indexOf('safari') !== -1){
+			return "Safari"
+		}
+		if((UA.indexOf('triend') !== -1) || (UA.indexOf('msie')!== -1) ){
+			return "IE"
+		}
+	}
+
+	var tB = typeBrowser();
+	if ("IE" == tB) {
+	    alert("我是 IE");
+	}
+	if ("FireFox" == tB) {
+	    alert("我是 Firefox");
+	}
+	if ("Chrome" == tB) {
+	    alert("我是 Chrome");
+	}
+	if ("Opera" == tB) {
+	    alert("我是 Opera");
+	}
+	if ("Safari" == tB) {
+	    alert("我是 Safari");
+	}
+
 	// var suserAgent = navigator.userAgent;
 	// console.log(suserAgent);
 

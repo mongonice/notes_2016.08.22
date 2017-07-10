@@ -2,153 +2,236 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+    <!-- 苹果手机是否可行-->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- 苹果手机的状态条是黑色的-->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <!-- 格式检查比如手机号颜色显示 -->
+    <meta name="format-detection" content="telephone=no, address=no, email=no">
 	<script src="jquery-1.12.3.min.js"></script>
+    <script>
+        // ;(function(win, doc){
+        //     win.onload = win.onresize = function() {
+        //         doc.documentElement.style.fontSize = doc.documentElement.clientWidth*50 / 375 +'px'
+        //     }
+        // })(window, document);
+    </script>
+	<style>
+		*{
+			padding:0;
+			margin:0;
+		}
+        body{
+            width:100%;
+        }
+		.div{
+			/*display:flex;
+			flex-direction: column;*/
+            width:300px;
+		}
+        .div1{
+            width: 25%;
+            padding-top: 50%;
+            background: pink;
+        }
+	</style>
 	<title>Document</title>
 </head>
 <body>
-	<div style="width:200px; height:200px; background:red"></div>
+    <div class="div">
+        <div class="div1"></div>
+    	<!-- <div><a href="#">哈哈哈</a></div>
+    	<div><a href="#">呵呵呵</a></div>
+    	<div><a href="#">啦啦啦</a></div> -->
+    </div>
 </body>
 <script>
-/*! migc-game-sites 2017-03-21 */
-$(function() {
-	function a(a) {
-		var b = $('<div class="mask"></div>'),
-			c = $("<div></div>").addClass(a).css({
-				height: $(window).height() + "px"
-			});
-		b.append(c), $(document.body).css({
-			position: "relative"
-		}).append(b), b.on("touchend", function(a) {
-			b.remove(), $(document.body).css({
-				position: "normal"
-			}), a.preventDefault()
-		})
-	}
-	function b() {
-		return /MicroMessenger/i.test(navigator.userAgent)
-	}
-	function c() {
-		return /(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent) ? "ios" : /(Android)/i.test(navigator.userAgent) ? "android" : "pc"
-	}
-	function d(a) {
-		function b() {
-			return f = jwplayer(a.videoWarp).setup({
-				width: h,
-				height: i,
-				html5player: "../js/jwplayer/jwplayer.html5.js",
-				playlist: [{
-					image: a.poster,
-					sources: [{
-						file: a.src
-					}]
-				}],
-				primary: "html5",
-				controls: !0,
-				events: {
-					onComplete: function() {},
-					onStop: function() {},
-					onReady: function() {},
-					onPlay: function() {},
-					onPause: function() {},
-					onBuffer: function() {},
-					onDisplayClick: function() {},
-					onBufferChange: function() {},
-					onBufferFull: function() {},
-					onError: function(a, b) {}
-				}
-			})
-		}
-		if ("android" == c && e()) {
-			var d = $(a.container).addClass("mibrower");
-			$("#" + a.videoWarp).css("height", d.height() - d.find(".close").height() + "px")
-		}
-		var f = null,
-			g = $("#" + a.videoWarp),
-			h = g.width(),
-			i = g.height();
-		return b
-	}
-	function e() {
-		return !!(/MiuiBrowser/i.test(navigator.userAgent) || /QQ/i.test(navigator.userAgent) || /MicroMessenger/i.test(navigator.userAgent))
-	}
-	$("img.lazy").lazyload({
-		threshold: "500"
-	});
-	var f = mi.util.getQueryVal("channel", url),
-		g = "pong",
-		h = "161214_586102",
-		i = {
-			curpageid: h,
-			type: g + "_" + f,
-			activity: g,
-			fuid: "",
-			cid: g + "_" + f + "_activity"
-		};
-	i.fuid = "showed", mi.util.sendStatistic(i);
-	var j = Swipe(document.getElementById("loop_list"), {
-		startSlide: 0,
-		speed: 400,
-		auto: 3e4,
-		continuous: !0,
-		activeId: "actives",
-		nav: "loop-nav",
-		touchend: function(a, b) {},
-		transitionEnd: function(a, b) {
-			$(".loop-nav li").removeClass("active").eq(a).addClass("active")
-		}
-	}),
-		j = Swipe(document.getElementById("screenshots-banner-warp"), {
-			startSlide: 0,
-			speed: 400,
-			auto: !1,
-			continuous: !0,
-			activeId: "active",
-			nav: "nav",
-			touchend: function(a, b) {},
-			transitionEnd: function(a, b) {
-				$(".nav li").removeClass("active").eq(a).addClass("active")
-			}
-		});
-	$(".screenshots-banner-li li,.loop_list li").css("display", "block"), setTimeout(function() {
-		$(".screenshots-banner-li li").removeClass("hidden")
-	}, 1e3), $(".arrow-left").on("touchend", function() {
-		j.prev()
-	}), $(".arrow-right").on("touchend", function() {
-		j.next()
-	});
-	var k = "touchend";
-	"pc" === mi.util.checkOperaSys() && (k = "click"), $(".download").on(k, function() {
-		return b() ? void a("download_weixin") : (i.fuid = "download", _hmt.push(["_trackEvent", "channel", "download", f]), "gamecenter" === f || "gamecenter_push" === f ? window.location = "migame://46606" : "meng_1084_1_android" === f ? o(download_url + "?channel=" + f + "&nav=none") : "" === f && window.JsBridge ? window.location = "migame://46606" : window.location = download_redirect + "?channel=" + f, mi.util.sendStatistic(i), void 0)
-	});
-	var l = null;
-	$("#playVideo").on(k, function() {
-		var a = $(this),
-			b = a.attr("data-url"),
-			c = a.attr("data-bg");
-		getPlayer = d({
-			container: ".video-alert",
-			videoWarp: "myvideo",
-			src: b,
-			poster: c
-		}), $(".video-alert").addClass("video-alert_show"), l = getPlayer(), l.play()
-	}), $("#video_wrapper .close").on(k, function() {
-		$(".video-alert").removeClass("video-alert_show"), $("#myvideo").children().remove(), l = null
-	});
-	var m = function() {
-			try {
-				if (WE) return !0
-			} catch (a) {}
-			return !1
-		},
-		n = function(a, b) {
-			try {
-				if (WE && WE.trigger) return "string" != typeof b && (b = JSON.stringify(b)), WE.trigger(a, b)
-			} catch (c) {}
-			return !1
-		},
-		o = function(a) {
-			m() ? n("opennew", a) : location.href = a
-		}
-});
+var oDiv = document.getElementsByTagName('div')[1]
+
+function getStyle(obj, sName){
+    return (obj.currentStyle || getComputedStyle(obj, false))[sName]
+}
+
+document.onclick = function(ev){
+    var ev = ev || window.event;
+    console.log(ev)
+    console.log(ev.pageX)
+    console.log(ev.pageY)
+    console.log(ev.clientX)
+    console.log(ev.clientY)
+}
+console.log(getStyle(oDiv, 'width'))
+console.log(getStyle(oDiv, 'height'))
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var twoSum = function(nums, target) {
+    var targetIndex = [];
+    if(nums.length >= 1){
+        for(var i= 0; i<nums.length; i++){
+            for(var j=i+1; j<nums.length; j++){
+                if((nums[i] + nums[j]) == target){
+                    targetIndex.push([i,j])
+                }  
+            }
+        }
+    }else{
+        return -1
+    }
+    return targetIndex
+};
+
+console.log(twoSum([3,6,4,2,7,1,0], 6))
+
+var reverse = function(x) {
+    var temp = 0;
+    if(x < 0){
+        temp = x;
+        x = Math.abs(x)
+    }
+    x = x + '';
+    x = parseInt(x.split('').reverse().join(''))
+    
+    return temp<0 ? -x : x
+};
+console.log(reverse(1534236469))
+
+var isPalindrome = function(x) {
+	var temp = 0
+    if(x < 0){
+        return false
+    }else if(x > 4294967295){
+        return false
+    }else{
+    	temp = x
+        x = x + ''
+        x = parseInt(x.split('').reverse().join(''))
+        console.log(x)
+        
+        if(x === temp){
+            return true
+        }else{
+            return false
+        }
+    }
+};
+
+console.log(isPalindrome(10))
+
+
+var h = ''+ true
+console.log(h.length)
+
+
+function add(o){
+	var  o = css;
+	o.url = 'abc'
+	css.url = 'abc'
+	o = {}
+}
+
+var css = {}
+add(css)
+console.log( css.url )
+
+var f1 = {n:1}
+var f2 = f1;
+f1.x = f1 = { n:2 }
+
+console.log( f1.x )
+console.log( f2.x )
+
+var romanToInt = function(s) {
+    var sum = 0;
+    s = s.split('').reverse().join('')
+    var arr = []
+    for(var i=0; i<s.length; i++){
+        console.log(isWho(s.charAt(i)))
+        arr.push(isWho(s.charAt(i)))
+    }
+
+    for(var j=1; j<arr.length; j++){
+    	if(arr[j] >= arr[j-1]){
+    		sum += +arr[j]
+    	}else{
+    		sum -= arr[j]
+    	}
+    }
+    sum = sum +arr[0]
+    console.log(sum)
+    function isWho(s){
+        switch(s){
+            case 'M':
+                return 1000
+                break;
+            case 'D':
+                return 500
+                break;
+            case 'C':
+                return 100
+                break;
+            case 'L':
+                return 50
+                break;
+            case 'X':
+                return 10
+                break;
+            case 'V':
+                return 5
+                break;
+            case 'I':
+                return 1
+                break;
+        }
+    }
+    
+    return sum
+};
+
+console.log( romanToInt('MCMXCVI') )
+
+
+var longestCommonPrefix = function(strs) {
+    if( strs === null || strs.length === 0 ) return "";
+    var pre = strs[0];
+    var n = 0;
+    for (var i=1; i<strs.length; i++) {
+        while( strs[i].indexOf(pre) !== 0){
+            console.log(strs[i])
+            pre = pre.substring(0, pre.length-1)
+            console.log(pre)
+            console.log(n)
+            n++ ;
+            continue;
+        }
+    }
+    return pre
+};
+
+console.log(longestCommonPrefix(['abca' , 'aba', 'aaab']))
+
+// var rel = []
+// var ass = 'AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT'
+// function repeatss(){
+//     var arr = [];
+//     for(var i=0; i arr.push(a.slice(i, i+10)))
+//         return arr
+
+// }
+
+// function bss(arr){
+//     for(var i=0; i var arrs= arr.slice(i+1))
+//         if(arrs.indexOf(arr[i]) != -1){
+//             if(rel.indexOf(arr[i]) == -1){
+//                 rel.push(arr[i])
+//             }
+//         }
+// }
+
+// bss(repeatss(ass))
+// console.log(rel)
 </script>
 </html>

@@ -2,9 +2,16 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+   <style>
+      span.id{
+         color: yellow;
+      }
+   </style>
 	<title>Document</title>
 </head>
 <body>
+   <input type="button" value="点我啊！">
+   <div id="txt">222444666999</div>
 </body>
 <script>
 /******************************* CODE 01. *******************************
@@ -125,157 +132,203 @@ console.log(window.Foo)  // bar
    F2();  // 2
 })();
 
-   // code 9 编写一个函数，参数为 数值型n ，且返回一个数组， 数组存放 2-32之间的随机数
-   // 范围为[2, 32] 则 Math.random() 中包含小的不包含大的，所以要变成 33
-   function getRandomArr(n){
-      var randomArr = [];
-      while(randomArr.length<n){
-         var temp = Math.floor(Math.random()*(33-2)+2)
-         if(randomArr.indexOf(temp) == -1){
-            randomArr.push(temp)
-         }
-      }
-      randomArr.sort(function(a , b){
-         return a-b
-      })
-      return randomArr;
-   }
-   console.log(getRandomArr(31))
 
-   // code 10
-   var fullname = 'John Doe'
-   ;(function(){
-      var fullname = 'mongo'
-      var obj = {
-         fullname :'Colin Ihrig',
-         prop: {
-            fullname :'Aurelio De Rosa',
-            getFullName :function(){
-               return this.fullname
-            }
-         }
-      }
 
-      console.log(obj.prop.getFullName())  // Aurelio De Rosa
-      var test = obj.prop.getFullName; 
-      console.log(test())  // John Doe
-   })();
-
-   // code 11
-   ;(function(){
-      var x = y = z = 1;
-   })();
-   // console.log(x)  // not defined
-   console.log(y)  // 1
-   console.log(z)  // 1
-
-   // code 12  1、实现对该数组的倒排   2、实现该数组的降序排序(根据a从大到小)
-   // 3、 请用Math.max() 取出数组中的最大值(不许用遍历)
-   ;(function(){
-      var array = [{a:4, b:5}, {a:2, b:3}, {a:5, b:2}, {a:0, b:5}]
-      // 实现该数组的倒排
-      array.reverse()
-      console.log(array)  //  [{a:0, b:5}, {a:5, b:2}, {a:2, b:3}, {a:4, b:5}]
-
-      // 实现该数组降序排序
-      array.sort(function(json1, json2){
-         return json2.a - json1.a
-      })
-      console.log(array)
-      var a = [1, 3, 4, 0, 2, 55];
-      Math.max(a)
-      console.log(Math.max.apply(null,a))
-   })();
-
-   // code 13
-   var o = 1, p = q = 0;
-   function add(n){
-      return n = n+2
-   }
-   p = add(o)
-   console.log(p)  // 4
-   function add(n){
-      return n = n+3
-   }
-   console.log(o)  // 1
-   q = add(o)
-   console.log(q)  // 4
-
-   // code 14  
-   ;(function(){
-      var a = 1;
-      var b = 2;
-      a = a + b;
-      b = a - b;
-      a = a - b;
-      console.log(a+'-----'+b)
-   })();
-
-   // code 15
-   function Foo() {
-      getName = function () { 
-         console.log (1); 
-      };
-      console.log('this is'+this)
-       return this;
-   }
-   Foo.getName = function () { 
-      console.log (2); 
-   };
-   Foo.prototype.getName = function () { 
-      console.log('baidu' && 'google'); 
-   };
-   getName();   // 5
-   var getName = function () { 
-      console.log (4);
-   };
-   function getName() { 
-      console.log (5);
-   }
-
-   // 请写出一下的输出结果
-   Foo.getName();  // 2
-   getName();   // 4
-   Foo().getName();  // 1
-   getName();  // 1
-   new Foo.getName();   // 2
-   new Foo().getName();  //  google
-   new new Foo().getName();   //   google
-
-   // code 16
-   ;(function(){
-      // 要求1 请校验手机号码：
-      var reg1 = /^1[34578]\d{9}/;
-      var mobileNumber = '1234567896';
-      console.log(reg1.test(mobileNumber));  // false
-
-      // 要求2 请校验11N 或者 12N 或者 1NNN开头的，后面跟7位或者8位的手机号
-      var reg2 = /^(11N)|(12N)\d{8}$|^1NNN\d{7}$/;
-      var phoneNumber = '3NNN2345678';
-      console.log(reg2.test(phoneNumber));  // false
-
-      // 要求3 纯数字但是包括小数点
-      var reg3 = /^\d+(\.\d+)?$/;
-      var str1 = '33a.33';
-      console.log(reg3.test(str1));   // false
-
-      // 要求4 纯数字但是不包小数点
-      var reg4 = /^[1-9]\d*$|^0$/;
-      var str2 = '034290';
-      console.log(reg4.test(str2));   // false
-
-      // 请输入2~6位汉字
-      var reg5 = /[\u4e00-\u9fa5]{2,6}/g;
-      var str5 = '名字';
-      console.log(reg5.test(str5)) // true
-   })();
-
-/*************************************17***************************************************
- * [for 循环 看好是等号不是加等于]
- * @param  {Number} var i             [description]
- * @param  {[type]} j   [description]
- * @return {[type]}     [description]
+/******************************* CODE 09. *******************************
+ * 编写一个函数，传入参数 数值型的n，且返回一个长度为n 的数组， 数组存放 2-32之间的随机数
+ *     且不能重复
+ * 随机排序一个数组  随机就会想到Math.random()  Math.random()*(m-n)+n
+ * 范围为[2, 32] 则 Math.random() 中包含小的不包含大的，所以要变成 33
  */
+function getRandomArr(n){
+   var randomArr = [];
+   while(randomArr.length<n){
+      var temp = Math.floor(Math.random()*(33-2)+2)
+      if(randomArr.indexOf(temp) == -1){
+         randomArr.push(temp)
+      }
+   }
+
+   // 此步用来检测是否有重复的
+   // randomArr.sort(function(a , b){
+   //    return a-b
+   // })
+   return randomArr;
+}
+console.log(getRandomArr(31))
+
+
+
+/******************************* CODE 10. ***************************|||有待考证****
+ * ;()(); 匿名的立即执行函数的 this 永远指向 全局！！！
+ */
+var fullname = 'John Doe'
+;(function(){
+   var fullname = 'mongo'
+   var obj = {
+      fullname :'Colin Ihrig',
+      prop: {
+         fullname :'Aurelio De Rosa',
+         getFullName :function(){
+            return this.fullname
+         }
+      }
+   }
+
+   console.log(obj.prop.getFullName())  // Aurelio De Rosa
+   var test = obj.prop.getFullName; 
+   console.log(test())  // John Doe
+})();
+
+
+
+/******************************* CODE 11. *******************************
+ * x 为局部变量，外部访问不到， y和z 是全局变量
+ */
+;(function(){
+   var x = y = z = 1;
+})();
+// console.log(x)  // not defined
+console.log(y)  // 1
+console.log(z)  // 1
+
+
+
+/******************************* CODE 12. **************Math.max.apply(null, arr)*****************
+ * 1、实现对该数组的倒排   2、实现该数组的降序排序(根据a从大到小)
+ * 3、请用Math.max() 取出数组中的最大值(不许用遍历)
+ */
+;(function(){
+   var array = [{a:4, b:5}, {a:2, b:3}, {a:5, b:2}, {a:0, b:5}]
+   // 实现该数组的倒排
+   array.reverse()
+   console.log(array)  //  [{a:0, b:5}, {a:5, b:2}, {a:2, b:3}, {a:4, b:5}]
+
+   // 实现该数组降序排序
+   array.sort(function(json1, json2){
+      return json2.a - json1.a
+   })
+   console.log(array)
+   var a = [1, 3, 4, 0, 2, 55];
+   Math.max(a)
+   console.log(Math.max.apply(null,a))
+})();
+
+
+
+/******************************* CODE 13. *******************************
+ * 同名的函数将被后者覆盖
+ * 为啥o不变呢，因为一直没有给o 赋值呀
+ */
+var o = 1, p = q = 0;
+function add(n){
+   return n = n+2
+}
+p = add(o)
+console.log(p)  // 4
+function add(n){
+   // o = o + 3  // o就会变成了 4
+   return n = n+3
+}
+console.log('13题、o= ' + o)  // 1
+q = add(o)
+console.log('13题、q= ' + q)  // 4
+
+
+
+/******************************* CODE 14. *******************************
+ * 将两个变量对调，且不能用中间变量
+ */ 
+;(function(){
+   var a = 1;
+   var b = 2;
+   a = a + b;
+   b = a - b;
+   a = a - b;
+   console.log('14题、a=' + a + '，b= ' + b)
+})();
+
+
+
+/******************************* CODE 15. *******************************
+ * 考察知识点很多
+ * 1. 运算符的优先级：new Foo() > Foo() > new Foo
+ * 2. 变量和函数同名时，函数提升高于变量，但是最终被变量覆盖
+ * 3. && 和 || 的逻辑运算符
+ */ 
+function Foo() {
+   getName = function () { 
+      console.log (1); 
+   };
+   console.log('this is'+this)
+   return this;
+}
+Foo.getName = function () { 
+   console.log (2); 
+};
+Foo.prototype.getName = function () { 
+   console.log('baidu' && 'google'); 
+};
+getName();   // 5
+var getName = function () { 
+   console.log (4);
+};
+function getName() { 
+   console.log (5);
+}
+
+// 请写出一下的输出结果
+Foo.getName();  // 2
+getName();   // 4
+Foo().getName();  // 1
+getName();  // 1
+new Foo.getName();   // 2
+new Foo().getName();  //  google
+new new Foo().getName();   //   google
+
+
+
+/******************************* CODE 16. *******************************
+ * 正则验证
+ */ 
+;(function(){
+   // 要求1 请校验手机号码：
+   var reg1 = /^1[34578]\d{9}/;
+   var mobileNumber = '1234567896';
+   console.log(reg1.test(mobileNumber));  // false
+
+   // 要求2 请校验11N 或者 12N 或者 1NNN开头的，后面跟7位或者8位的手机号
+   var reg2 = /^(11N)|(12N)\d{8}$|^1NNN\d{7}$/;
+   var phoneNumber = '3NNN2345678';
+   console.log(reg2.test(phoneNumber));  // false
+
+   // 要求3 纯数字但是包括小数点
+   var reg3 = /^\d+(\.\d+)?$/;
+   var str1 = '33a.33';
+   console.log(reg3.test(str1));   // false
+
+   // 要求4 纯数字但是不包小数点
+   var reg4 = /^[1-9]\d*$|^0$/;
+   var str2 = '034290';
+   console.log(reg4.test(str2));   // false
+
+   // 要求5 请输入2~6位汉字
+   var reg5 = /[\u4e00-\u9fa5]{2,6}/g;
+   var str5 = '名字';
+   console.log(reg5.test(str5)) // true
+
+   // 要求6 邮箱验证
+   var reg6 = /(\w-*\.*)+@(\w-?)+(\.\w{2,4}){1,2}/;
+   var str6 = 'm-mongo.@mongo-.___.___'
+   console.log(reg6.test(str6))  // true
+})();
+
+
+
+
+/******************************* CODE 17. *******************************
+ * 仔细就好， k = i+j 而非 k += i+j
+ */ 
 for(var i=0,j=0; i<10, j<6; i++,j++){
    k = i+j;
    console.log(k)
@@ -285,26 +338,37 @@ console.log(j)   // 6
 console.log(k)  // 10
 
 
-/*************************************18***************************************************
- * [oBtn 事件对象event 兼容性写法]
- * @type {[type]}
- */
-// var oBtn = document.getElementsByTagName('input')[0];
-// oBtn.onclick = function (e){
-//    // 事件对象 不兼容 
-//    var e = e || window.event;
-//    // 阻止冒泡
-//     e.stopProPagation ? e.stopProPagation() : (e.cancelBubble = true);
-//    return e.pageX || e.clientX + document.body.scrollLeft;  // 获取光标水平位置
-//                  // IE版本
-//    console.log(e);
-// }
 
-/************************************19****************************************************
- * [getBytes 求一个字符串的字节长度]
- * @param  {[type]} str [description]
- * @return {[type]}     [description]
- */
+/******************************* CODE 18. *******************************
+ * 事件对象的兼容写法
+ */ 
+var oBtn = document.getElementsByTagName('input')[0];
+oBtn.onclick = function (e){
+   // 事件对象 不兼容 
+   var e = e || window.event;
+   console.log(e);
+
+   // 事件委托 目标元素
+   //               非FF          FF         
+   var target = e.srcElement || e.target
+
+   // onmouseover 和 onmouseout 
+   //              非FF              FF
+   var fromEle = e.fromElement || e.relatedTarget
+   var toEle = e.toElement || e.relatedTarget
+
+   // 阻止冒泡
+   e.stopProPagation ? e.stopProPagation() : (e.cancelBubble = true);
+   return e.pageX || e.clientX + document.body.scrollLeft;  // 获取光标水平位置
+                        // IE版本 
+}
+
+
+
+
+/******************************* CODE 19. *******************************
+ * 求一个字符串字节长度 在 0-255之间的都是一个字节，之外是两个字节
+ */ 
 function getBytes(str){
    var bytes = str.length;
    for(var i =0; i< bytes; i++){
@@ -316,13 +380,13 @@ function getBytes(str){
 }
 
 var str = "求一个字符串字节长度，且在0~255之间为一个字节，之外两个字节"
-console.log(getBytes(str))
+console.log('19题、字节的长度= ' + getBytes(str))
 
-/*********************************20*******************************************************
- * [给Array添加forEach方法]
- * @param  {[type]} !Array.prototype.forEach [description]
- * @return {[type]}                          [description]
- */
+
+
+/******************************* CODE 20. *******************************
+ * 如果浏览器中的js不支持forEach 和map方法，那就直接加到原型上面
+ */ 
 if(!Array.prototype.forEach){
    Array.portotype.forEach = function(fn){
       for(var i= 0, len = this.length; i<len; i++){
@@ -346,10 +410,13 @@ if(!Array.prototype.map){
    console.log(val)
 })
 
-/**********************************21******************************************************
- * [fn1 和 fn2 存的地址同指向 一个函数]
- * @return {[type]} [description]
- */
+
+
+
+/******************************* CODE 21. *******************************
+ * 具名函数中又赋给了一个变量，那么此时这个具名只能在该函数中生效，在外面用
+ * 该具名的话是 defined报错
+ */ 
 var fn1 = function fn2(){
    console.log( fn1 === fn2 )  // true
    console.log(typeof fn2)
@@ -383,7 +450,9 @@ var foo = 'hello';
 
 
 /******************************* CODE 23. *******************************
- * 一定要注意函数内部也定义了 var foo
+ * 排序 方法1：冒泡排序   方法二：快速排序又称(二分排序)
+ * 快速排序的思路是 将数据对半分，选中间的数为参考，左右分别和中间的数据进行比较，
+ * 然后分别站对位置，然后再结合递归的思想
  */
 function bubbleSort(arr){
    for(var i = 0, len = arr.length; i<len; i++){
@@ -406,6 +475,7 @@ function quickSort(arr){
 
    // 选择"基准"（pivot），并将其与原数组分离，再定义两个空数组，用来存放一左一右的两个子集
    var pivotIndex = Math.floor(arr.length / 2) ;
+   // 因为splice出来的还是数组，只不过是一个元素的数组，要取出来就得加个下标[0]
    var pivot = arr.splice(pivotIndex, 1)[0];
    var left = [], right = [];
    for (var i = 0; i < arr.length; i++){
@@ -415,6 +485,8 @@ function quickSort(arr){
 　　　　　　right.push(arr[i]);
 　　　　}
 　　}
+
+   // 为啥还得加[privot],因为 priviot是个数，得变成数组的模样！
    return quickSort(left).concat([pivot], quickSort(right));
 
 }
@@ -460,7 +532,7 @@ console.log(formatNum(232321456.236))
 
 
 /******************************* CODE 25. *******************************
- * 
+ * return之后的代码都不执行的哦！
  */
 var kk = cc = 0;
 function aa(n){
@@ -469,44 +541,31 @@ function aa(n){
    cc++;
    if( cc >10 ) return cc
 }
-console.log('kk=' + kk)
-console.log('cc=' + kk)
-console.log(aa(5))
+console.log('kk=' + kk)   // 0
+console.log('cc=' + kk)   // 0
+console.log('aa(5)=' + aa(5)) // 0
 
 
 
-/******************************* CODE 26. *******************************
- * 如何将浮点数的 小数点 左边的 部分每隔 三位  加一个 逗号 如12,000,000,000.11 
- * 浮点型 用 f来表示，因为是float代表浮点型
+/******************************* CODE 26. ****************************|||||***
+ * 考察的是replace替换的规则
+ * 目前有疑问是 我觉得正则表达式是/(\{\d+\})/g 而非  /\{(\d+)\}/g ????????????
  */
-// ;(function(){
-//    function Fn(str){
-//       this.str = str
-//    }
-//    Fn.prototype.format = function(){
-//       var args = Array.prototype.slice.call(arguments)
-//       return this.str.replace(/{\d}/g, function(val, index){
-//          return args[index] || ''
-//       })
-//    }
+;(function(){
+   function Fn(str){
+      this.str = str
+   }
+   Fn.prototype.format = function(){
+      var args = Array.prototype.slice.call(arguments)
+      return this.str.replace(/\{(\d+)\}/g, function(val, index){
+         console.log(index)
+         return args[index] || ''
+      })
+   }
 
-//    var t = new Fn('<p><a href="{0}">{1}</a><span>{2}</span></p>')
-//    t.format()
-//    console.log( t.format() )
-// })();
-
-
-// var obj = {
-//    name: 'obj',
-//    close:function(){
-//       this.name = 'close'
-//       return function(){
-//          return this.name
-//       }
-//    }
-// }
-
-//    console.log(obj.close().call(this))
+   var t = new Fn('<p><a href="{0}">{1}</a><span>{2}</span></p>')
+   console.log( '26、正则替换的结果为='+ t.format('https://github.com/mongonice', 'mongo' , 'nice'))
+})();
 
 
 
@@ -568,14 +627,14 @@ mongo.func()
 
 
 /******************************* CODE 30. *******************************
- * 
+ * 显示类型转换的规则
  */
 console.log(parseInt('X8X8') + parseFloat('8'))  // NaN
 
 
 
 /******************************* CODE 31. *******************************
- * 
+ * fool存的指针地址不变，所以执行的一直是同一个函数
  */
 var donkey = 2;
 var fool = (function(){
@@ -592,7 +651,7 @@ fool();  // 5
 
 
 /******************************* CODE 32. *******************************
- * 
+ * 考察的是this的指向
  */
 window.val = 1;
 var json = {
@@ -633,5 +692,242 @@ var res = trick();
 res()    // 99
 nAdd()  // NaN
 res()  // 99
+
+
+
+/******************************* CODE 34. *******************************
+ * obj.close() => function(){ return this.name } 一个匿名函数哦！
+ * 一个匿名函数立即执行的this 是全局的！！！！！！
+ */
+var name = 'unknow'
+var obj = {
+   name: 'obj',
+   close:function(){
+      return function(){
+         return this.name
+      }
+   }
+}
+console.log('34题、加call = ' + obj.close().call(this))  // unknow
+console.log('34题、不加call = ' + obj.close()())   // unknow
+
+
+
+/******************************* CODE 35. *******************************
+ * node:{id:'xxx', name:'xxx', children:[node, node, node....]},每个id唯一，
+ * 当没有子节点时，children为false，现在是给定id输出相应的信息
+ */
+function getNodeById(data, id){
+   if(data.id === id){
+      return data
+   }else if(data.children){
+      var _data = data.children;
+      for(var i =0; i< _data.length; i++){
+         // return arguments.callee(_data[i], id)
+         // console.log(_data[i])
+         var res = arguments.callee(_data[i], id)
+         // return res
+         if(res) return res
+      }
+   }else{
+      return false;
+   }
+}
+
+
+var data = {
+   id: 1, 
+   name: 'num1', 
+   children: [
+      {id: 2, name:'num2'}, 
+      {id: 3, 
+         name:'num3', 
+         children:[
+            {id: 5, name:'num4'},
+            {id: 6, name:'num5'},
+            {id: 7, name:'num6'}
+         ]
+      }, 
+      {
+         id: 4, 
+         name:'num7',
+         children:[
+            {id: 8, name:'num7'},
+            {id: 9, name:'num8'},
+            {id: 10, name:'num9'}
+         ] 
+      }
+   ]
+}
+console.log('第35题=' + JSON.stringify(getNodeById(data, 6)))
+
+
+
+/******************************* CODE 36. *******************************
+ * 找出要找的匹配文件
+ */
+
+function findDocList(docArr, arr){
+   var res = [];
+   for(var i=0; i<docArr.length; i++){
+      var wordsArr = docArr[i].words;
+
+      var isHave = true;
+      for(var j=0; j<arr.length; j++){
+         if(wordsArr.indexOf(arr[j]) == -1){
+            isHave = false
+         }
+      }
+      if( isHave == true)
+      res.push('文档'+ docArr[i].id)
+   }
+
+   return res;
+}
+
+var docList = [
+  {id: 1, words: ['h', 'm']},
+  {id: 2, words: ['h', 'n', 'l']},
+  {id: 3, words: ['i', 'l', 'r', 'h', 'm']},
+  {id: 4, words: ['h', 'm']},
+  {id: 5, words: ['a', 'b','m']},
+]
+console.log(findDocList(docList, ['h', 'm']))
+
+
+/******************************* CODE 37. *******************************
+ * 此时的this 和 self 指的都是 myObject
+ * 但是当在封闭空间的时候， this永远指向全局window
+ */
+
+var myObject = {
+   foo1: 'bar',
+   func: function(){
+      var self = this
+      console.log('outer func : this.foo=' + this.foo1)  // bar
+      console.log('outer func : self.foo=' + self.foo1)  // bar
+      ;(function(){
+         console.log('inner func : this.foo=' + this.foo1)  // undefined
+         console.log('inner func : self.foo=' + self.foo1)  // bar
+      })();
+   }
+}
+
+myObject.func() // bar var undefined bar
+
+
+
+/******************************* CODE 38. *******************************
+ * 正常替换就行
+ */
+var oDiv = document.getElementById('txt')
+var markStr = oDiv.innerHTML
+var newMark = markStr.replace(/(444)/, "<span style='background:pink'>$1</span>")
+console.log(newMark)
+oDiv.innerHTML = newMark
+
+
+
+/******************************* CODE 39. *******************************
+ * 有一数组a = [8, 10, 30, 55, 78, 90, 1], 新建一个数组b，b从a中一次随机选取
+ * 一个元素，取完为止
+ */
+
+function getRandom(arr){
+   var res = [];
+   var len = arr.length;
+
+   while(res.length<= len){
+      var index = Math.floor(Math.random()*arr.length)
+      res.push(arr[index])
+      arr.splice(index, 1)
+   }
+
+   return res
+}
+
+var testA = [8, 10, 30, 55, 78, 90, 1];
+console.log('第39题=' + getRandom(testA))
+
+
+
+/******************************* CODE 40. *******************************
+ * 
+ */
+var length = 20
+function fnLen(){
+   console.log('第40题=' + this.length)
+}
+
+var lenObj = {
+   length: 5,
+   method: function(fn){
+      fn()   // 20
+      arguments[0]()             //  1  
+      arguments[0].call(lenObj)  // 5
+      fn.call(arguments[0])      // 0
+      console.log( '第40题=' + this.length )  // 5
+   }
+}
+
+lenObj.method(fnLen)  // 20  1
+
+
+
+/******************************* CODE 41. *******************************
+ * 去重 和相邻去重
+ */
+function delRepeat(opt) {
+   var bool = Object.prototype.toString.call(opt).slice(8, -1);
+   var opt = bool == 'Array' ? opt : opt.split('');
+   var _opt = [];
+   for(var i=0, len = opt.length; i<len; i++){
+      if(_opt.indexOf(opt[i]) == -1){
+         _opt.push(opt[i])
+      }
+   }
+   return bool == 'Array' ? _opt : _opt.join('');
+}
+
+// 相邻去重
+function delNeighbor(opt) {
+   var bool = Object.prototype.toString.call(opt).slice(8, -1);
+   var opt = bool == 'Array' ? opt : opt.split('');
+   for(var i=0; i<opt.length; i++){
+      if(opt[i] == opt[i+1]){
+         opt.splice(i,1);
+         i--
+      }
+   }
+   return bool == 'Array' ? opt : opt.join('');
+}
+
+
+
+/******************************* CODE 42. *******************************
+ * 最小公倍数 和最大公约数
+ */
+// 最小公倍数
+function minCommonMultiple(a, b){
+   var max = a, min = b;
+   (a<b) && (max = b, min = a)
+   var i = 1;
+   while((max*i%min) != 0){
+      i++
+   }
+   return max*i
+}
+console.log(maxCommonDivisor(12,8))
+
+// 最大公约数
+function maxCommonDivisor(a ,b){
+   var max = a, min = b;
+   (a<b) && (max = b, min = a)
+   var i = min;
+   while(!(max%i == 0 && min%i == 0)){
+      i--
+   }
+   return i
+}
 </script>
 </html>

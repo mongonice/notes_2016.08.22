@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		.p{
+			width: 100%;
+			height: 800px;
+			position: relative;
+			background: pink;
+		}
+		.c{
+			width: 200px;
+			height: 200px;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			background: yellow;
+			display: none;
+		}
+	</style>
+	<title>Document</title>
+</head>
+<body>
+	<div class="p">
+		<div class="c">
+			<div><button class="btn">删除</button></div>
+			<div><button class="btn">删除</button></div>
+			<div><button class="btn">删除</button></div>
+		</div>
+	</div>
+</body>
+<script>
+	var oP = document.getElementsByClassName('p')[0];
+	var oC = document.getElementsByClassName('c')[0];
+	var oBtn = document.getElementsByClassName('btn');
+	var count = 0;
+
+	oP.onclick = function(){
+		oC.style.display = 'block';
+	}
+
+	oC.onclick = function(){
+		console.log(count++)
+	}
+
+	for(var i=0; i<oBtn.length; i++){
+		oBtn[i].onclick = function(ev){
+			var ev = ev || event;
+			console.log(count++)
+			ev.stopPropagation();
+		}
+	}
+</script>
+</html>

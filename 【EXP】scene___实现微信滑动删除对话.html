@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+	<!-- 苹果手机是否可行-->
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<!-- 苹果手机的状态条是黑色的-->
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<!-- 格式检查比如手机号颜色显示 -->
+	<meta name="format-detection" content="telephone=no, address=no, email=no">
+	<link rel="stylesheet" href="css/base.css">
+	<style>
+		.list{
+			width: 100%;
+		}
+		.list>li{
+			position:relative;
+			width: 100%;
+			height: 50px;
+			border: 1px solid #ccc;
+		}
+		.fix-block{
+			position: absolute;
+			right: 0;
+			top: 0;
+		}
+		.fix-block span{
+			height: 34px;
+			padding: 16px 15px 0;
+			font-size: 16px;
+			color: #fff;
+		}
+		.move-block{
+			width: 100%;
+			height: 100%;
+			position:absolute;
+			left: 0;
+			top: 0;
+			background: #fff;
+			padding: 0 5px;
+		}
+		.l{
+			background: #999;
+		}
+		.r{
+			background: #FF3030;
+		}
+		.icon{
+			width: 40px;
+			margin-top: 5px;
+			border-radius: 5px;
+		}
+		.user-info{
+			margin-left: 8px;
+			padding-top: 9px;
+		}
+		.name{
+			font-size: 14px;
+		}
+		.info{
+			font-size:12px;
+			color: #999;
+			margin-top: 4px;
+		}
+		.time{
+			font-size: 10px;
+			color: #999;
+			padding:10px 10px 0 0;
+		}
+	</style>
+	<title>Document</title>
+</head>
+<body>
+	<ul class="list">
+		<li>
+			<div class="clearfix fix-block">
+				<span class="fl l">标记未读</span>
+				<span class="fl r">删除</span>
+			</div>
+			<div class="move-block">
+				<img src="images/icon.jpg" class="fl icon">
+				<div class="fl user-info">
+					<p class="name">苏格拉底</p>
+					<p class="info">[呲牙]</p>
+				</div>
+				<span class="fr time">下午6:45</span>
+			</div>
+		</li>
+		<li>
+			<div class="clearfix fix-block">
+				<span class="fl l">标记未读</span>
+				<span class="fl r">删除</span>
+			</div>
+			<div class="move-block">
+				<img src="images/icon.jpg" class="fl icon">
+				<div class="fl user-info">
+					<p class="name">苏格拉底</p>
+					<p class="info">[呲牙]</p>
+				</div>
+				<span class="fr time">下午6:45</span>
+			</div>
+		</li>
+		<li>
+			<div class="clearfix fix-block">
+				<span class="fl l">标记未读</span>
+				<span class="fl r">删除</span>
+			</div>
+			<div class="move-block">
+				<img src="images/icon.jpg" class="fl icon">
+				<div class="fl user-info">
+					<p class="name">苏格拉底</p>
+					<p class="info">[呲牙]</p>
+				</div>
+				<span class="fr time">下午6:45</span>
+			</div>
+		</li>
+		<li>
+			<div class="clearfix fix-block">
+				<span class="fl l">标记未读</span>
+				<span class="fl r">删除</span>
+			</div>
+			<div class="move-block">
+				<img src="images/icon.jpg" class="fl icon">
+				<div class="fl user-info">
+					<p class="name">苏格拉底</p>
+					<p class="info">[呲牙]</p>
+				</div>
+				<span class="fr time">下午6:45</span>
+			</div>
+		</li>
+		<li>
+			<div class="clearfix fix-block">
+				<span class="fl l">标记未读</span>
+				<span class="fl r">删除</span>
+			</div>
+			<div class="move-block">
+				<img src="images/icon.jpg" class="fl icon">
+				<div class="fl user-info">
+					<p class="name">苏格拉底</p>
+					<p class="info">[呲牙]</p>
+				</div>
+				<span class="fr time">下午6:45</span>
+			</div>
+		</li>
+		<li>
+			<div class="clearfix fix-block">
+				<span class="fl l">标记未读</span>
+				<span class="fl r">删除</span>
+			</div>
+			<div class="move-block">
+				<img src="images/icon.jpg" class="fl icon">
+				<div class="fl user-info">
+					<p class="name">苏格拉底</p>
+					<p class="info">[呲牙]</p>
+				</div>
+				<span class="fr time">下午6:45</span>
+			</div>
+		</li>
+	</ul>
+</body>
+<script>
+var oDiv = document.querySelectorAll('.move-block')
+console.log(oDiv.length)
+
+for(var i=0; i<oDiv.length; i++){
+	;(function(index){
+		var x=0;
+	    var y=0;
+	    oDiv[index].addEventListener('touchstart',function(ev){
+
+	    	// 一开始点击时的坐标
+	        var downX=ev.targetTouches[0].pageX;
+	        var downY=ev.targetTouches[0].pageY;
+	        var disX=downX-x;
+	        var disY=downY-y;
+
+	        function fnMove(ev){
+
+	        	x = ev.targetTouches[0].pageX-downX
+	   
+	            if( x < -200 ){
+	            	x = -200
+	            }
+	            if(x > 0){
+	            	x = 0
+	            }
+	            
+	            oDiv[index].style.left = x + 'px'
+	        }
+
+	        function fnEnd(){
+	            document.removeEventListener('touchmove',fnMove,false);
+	            document.removeEventListener('touchend',fnEnd,false);
+	        }
+
+	        document.addEventListener('touchmove',fnMove,false);
+	        document.addEventListener('touchend',fnEnd,false);
+	        ev.preventDefault();
+	    },false);
+	})(i);
+}
+
+	
+</script>
+</html>
