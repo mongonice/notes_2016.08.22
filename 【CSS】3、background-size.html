@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+  <style>
+    /*
+     * background:url(地址) repeat center center #000;
+     * background-size: x (默认y为auto)
+     * background-size: x y;
+     * background-size: cover; 
+     *    cover 情景一：背景图片能被框包围起来，1、显示完整 2、被放大 3、全部覆盖
+     *          情景二：背景图片不能被框包围起来，1、显示不全 2、小边显示完整，大边被剪切 
+     *                                            3、全部覆盖
+     *                                            
+     * ************************************************************ *                                        
+     * background-size: contain;
+     *    contain 情景一：背景图片能被框包围起来，1、显示完整 2、不全覆盖 
+     *                                            3、以大边为基准填充
+     *            情景二：背景图片不能被框包围起来 1、以大边为基准填充，2、显示不全 3、会缩放
+     *            
+     * ************************************************************ *
+     *    对比：contain  不会全部覆盖   背景图片显示完全 ( 一般在图片与框的宽高比例不相等的情况下)
+     *          cover     会全部覆盖    背景图片显示有可能不全
+     */
+    *{
+      padding: 0;
+      margin: 0;
+    }
+    div{
+      width: 1000px;
+      height: 800px;
+      margin: 10px auto;
+      border: 2px solid #000;
+      /* bg1 352*220 */
+      /*background: url(images/bg1.jpg) no-repeat;*/
+      /*background-size:100% auto;*/
+       /*background-size: contain;*/
+
+      /* bg1 497*1009 当图片的h > w 时，以h为基准 */
+      /*background: url(images/bg2.png) no-repeat;*/
+      /*background-size: auto 100%;*/
+      /*background-size: contain;*/
+
+      /* bg1 1280*800 */
+      background: url(images/bg3.jpg) no-repeat;
+      background-size: contain;
+      /*background-size: 100% 100%; */
+      /*background-size: cover; */
+    }
+  </style>
+	<title></title>
+</head>
+<body>
+  <div></div>
+</body>
+</html>

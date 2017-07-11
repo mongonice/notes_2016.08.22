@@ -6,17 +6,31 @@
     <!-- <meta name="viewport" content="initial-scale=0.5, maximum-scale=0.5, minimum-scale=0.5, user-scalable=no">
     <meta name="viewport" content="initial-scale=0.3333333333333333, maximum-scale=0.3333333333333333, minimum-scale=0.3333333333333333, user-scalable=no"> -->
     <script>
-        ;(function(win, doc){
-            win.onload = win.resize = function(){
-                doc.documentElement.style.fontSize = 50*doc.documentElement.clientWidth / 375 +'px'
-                console.log(window.devicePixelRatio)
-                var r = doc.getElementsByClassName('r')[0]
-                console.log(getStyle(r, 'border-width'))
-                function getStyle(obj, sName){
-                    return (obj.currentStyle || getComputedStyle(obj, false))[sName]
-                }
-            }
-        })(window,document);
+        // ;(function(win, doc){
+        //     win.onload = win.resize = function(){
+        //         doc.documentElement.style.fontSize = 50*doc.documentElement.clientWidth / 375 +'px'
+        //         console.log(window.devicePixelRatio)
+        //         var r = doc.getElementsByClassName('r')[0]
+        //         console.log(getStyle(r, 'border-width'))
+        //         function getStyle(obj, sName){
+        //             return (obj.currentStyle || getComputedStyle(obj, false))[sName]
+        //         }
+        //     }
+        // })(window,document);
+        // 
+        // 
+        // 
+        var metaEl = doc.createElement('meta');
+        var scale = isRetina ? 0.5:1;
+        metaEl.setAttribute('name', 'viewport');
+        metaEl.setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no');
+        if (docEl.firstElementChild) {
+            document.documentElement.firstElementChild.appendChild(metaEl);
+        } else {
+            var wrap = doc.createElement('div');
+            wrap.appendChild(metaEl);
+            documen.write(wrap.innerHTML);
+        }
     </script>
     <style>
         html,body{font-size:50px;}
@@ -55,13 +69,34 @@
             overflow: hidden;
             background: red;
         }
+        .border-top {
+          padding-top: 1px;
+          border-top: 0 none;
+          background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAAXNSR…hZcwAADsMAAA7DAcdvqGQAAAAQSURBVBhXY5g5c+Z/BhAAABRcAsvqBShzAAAAAElFTkSuQmCC);
+          background-position: 0 0;
+          background-repeat: repeat-x;
+          background-size: 1px 1px;
+        }
+
+        .border_top {
+          background-image: -webkit-linear-gradient(right,transparent 50%,#999 50%);
+          background-image: linear-gradient(to right,transparent 50%,#999 50%);
+          background-size: 1px 100%;
+          background-repeat: no-repeat;
+          background-position: center right;
+          border-top: 0 none;
+          padding-top: 1px;
+        }
     </style>
     <title>视网膜下1px的问题</title>
 </head>
 <body>
+
   <div class="clearfix" style="padding:0.4rem">
       <div class="fl l"></div>
       <div class="fl r"></div>
-  </div>  
+  </div> 
+  <hr>
+  <div class="border-top"></div> 
 </body>
 </html>

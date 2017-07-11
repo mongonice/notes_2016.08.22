@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+<script>
+document.onclick = function(ev) {
+	// var ev = ev || event;
+	var ev = ev || window.event
+	console.log(ev)
+	// 冒泡
+	console.log(ev.cancelBubble)
+
+	// 源元素
+	console.log(ev.srcElement)
+
+	// target
+	console.log(ev.target)
+
+	// 从哪里
+	console.log(ev.fromElement)
+
+	// 到哪里
+	console.log(ev.toElement)
+
+	// 鼠标点击时的坐标
+	console.log(ev.clientX)
+	return ev.pageX || ev.clientX + document.body.scrollLeft;
+	console.log(ev.clientY)
+	console.log(ev.pageX)
+	console.log(ev.pageY)
+}
+</script>
+</html>
